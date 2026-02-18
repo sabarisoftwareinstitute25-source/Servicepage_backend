@@ -1,7 +1,6 @@
 package com.matrimony.servicepage.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.matrimony.servicepage.enums.*;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -34,10 +33,7 @@ public class EntertainmentVendor {
     @Column(nullable = false)
     private String contactPersonName;
 
-    @ElementCollection
-    @CollectionTable(name = "entertainment_type",
-            joinColumns = @JoinColumn(name = "entertainment_vendor_id"))
-    @Column(name = "type_of_entertainment_services", nullable = false)
+    @Column(name = "type_of_entertainment_services", columnDefinition = "TEXT",nullable = false)
     private List<String> typeOfEntertainmentServices = new ArrayList<>();
 
     private String other;
@@ -64,8 +60,8 @@ public class EntertainmentVendor {
     private Integer pinCode;
 
     // Step 3
-    @Enumerated(EnumType.STRING)
-    private BusinessType businessType;
+    @Column(name = "business_type", columnDefinition = "TEXT",nullable = false)
+    private String businessType;
 
     private String gstNumber;
 
@@ -76,12 +72,8 @@ public class EntertainmentVendor {
     private Integer yearsOfExperience;
 
     // Step 4
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "entertainment_events_covered",
-            joinColumns = @JoinColumn(name = "entertainment_vendor_id"))
-    @Enumerated(EnumType.STRING)
-    @Column(name = "events_covered", nullable = false)
-    private List<EventsCovered> eventsCovered = new ArrayList<>();
+    @Column(name = "events_covered", columnDefinition = "TEXT",nullable = false)
+    private List<String> eventsCovered = new ArrayList<>();
 
     @Column(nullable = false)
     private Integer typicalPerformanceDuration;
@@ -115,12 +107,8 @@ public class EntertainmentVendor {
     private Boolean setup;
 
     // Step 7
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "entertainment_preferred_locations",
-            joinColumns = @JoinColumn(name = "entertainment_vendor_id"))
-    @Enumerated(EnumType.STRING)
-    @Column(name = "location", nullable = false)
-    private List<PreferredLocation> preferredLocations = new ArrayList<>();
+    @Column(name = "preferred_locations", columnDefinition = "TEXT",nullable = false)
+    private List<String> preferredLocations = new ArrayList<>();
 
     @Column(nullable = false)
     private Boolean accommodationChargesApplicable;
@@ -131,17 +119,10 @@ public class EntertainmentVendor {
     @Column(columnDefinition = "TEXT")
     private String specialDescription;
 
-    @ElementCollection
-    @CollectionTable(name = "entertainment_photos",
-            joinColumns = @JoinColumn(name = "entertainment_vendor_id"))
-    @Column(name = "photo_url")
+    @Column(name = "performance_photos", columnDefinition = "TEXT")
     private List<String> performancePhotos = new ArrayList<>();
 
-    // FIXED JOIN COLUMN (removed space in name)
-    @ElementCollection
-    @CollectionTable(name = "entertainment_portfolio",
-            joinColumns = @JoinColumn(name = "entertainment_vendor_id"))
-    @Column(name = "portfolio")
+    @Column(name = "portfolio", columnDefinition = "TEXT")
     private List<String> portfolio = new ArrayList<>();
 
     // Step 8
@@ -166,11 +147,8 @@ public class EntertainmentVendor {
     @Column(name = "instagram_link", length = 500)
     private String instagramLink;
 
-    @ElementCollection
-    @CollectionTable(name = "entertainment_performance_video_link",
-            joinColumns = @JoinColumn(name = "entertainment_vendor_id"))
-    @Column(name = "performance_video_link")
-    private List<String> performanceVideoLink = new ArrayList<>();
+    @Column(name = "performance_video_link", length = 500)
+    private String performanceVideoLink;
 
     // Step 10
     @Column(nullable = false)

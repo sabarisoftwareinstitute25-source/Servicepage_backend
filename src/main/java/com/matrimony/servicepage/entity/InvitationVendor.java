@@ -1,7 +1,6 @@
 package com.matrimony.servicepage.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.matrimony.servicepage.enums.*;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -34,10 +33,7 @@ public class InvitationVendor {
     @Column(nullable = false)
     private String contactPersonName;
 
-    @ElementCollection
-    @CollectionTable(name = "invitation_services",
-            joinColumns = @JoinColumn(name = "invitation_vendor_id"))
-    @Column(name = "type_of_services_provided", nullable = false)
+    @Column(name = "type_of_services_provided", columnDefinition = "TEXT",nullable = false)
     private List<String> typeOfServicesProvided = new ArrayList<>();
 
     private String other;
@@ -64,8 +60,8 @@ public class InvitationVendor {
     private Integer pinCode;
 
     // Step 3
-    @Enumerated(EnumType.STRING)
-    private BusinessType businessType;
+    @Column(name = "business_type", columnDefinition = "TEXT",nullable = false)
+    private String businessType;
 
     private String gstNumber;
 
@@ -76,19 +72,11 @@ public class InvitationVendor {
     private Integer yearsOfExperience;
 
     // Step 4
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "invitation_types_offered_table",
-            joinColumns = @JoinColumn(name = "invitation_vendor_id"))
-    @Enumerated(EnumType.STRING)
-    @Column(name = "invitation_types_offered", nullable = false)
-    private List<InvitationTypesOffered> invitationTypesOffered = new ArrayList<>();
+    @Column(name = "invitation_types_offered", columnDefinition = "TEXT",nullable = false)
+    private List<String> invitationTypesOffered = new ArrayList<>();
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "invitation_printing_options",
-            joinColumns = @JoinColumn(name = "invitation_vendor_id"))
-    @Enumerated(EnumType.STRING)
-    @Column(name = "printing_options", nullable = false)
-    private List<PrintingOptions> printingOptions = new ArrayList<>();
+    @Column(name = "printing_options", columnDefinition = "TEXT",nullable = false)
+    private List<String> printingOptions = new ArrayList<>();
 
     @Column(nullable = false)
     private Integer minimumOrderQuantity;
@@ -97,12 +85,8 @@ public class InvitationVendor {
     private Boolean customizationAvailable;
 
     // Step 5
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "invitation_types_of_gifts",
-            joinColumns = @JoinColumn(name = "invitation_vendor_id"))
-    @Enumerated(EnumType.STRING)
-    @Column(name = "types_of_gifts_offered", nullable = false)
-    private List<TypesOfGiftsOffered> typesOfGiftsOffered = new ArrayList<>();
+    @Column(name = "types_of_gifts_offered", columnDefinition = "TEXT",nullable = false)
+    private List<String> typesOfGiftsOffered = new ArrayList<>();
 
     @Column(nullable = false)
     private Integer minimumOrderQuantityForGifts;
@@ -143,12 +127,8 @@ public class InvitationVendor {
     private Integer giftPreparation;
 
     // Step 8
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "invitation_preferred_locations",
-            joinColumns = @JoinColumn(name = "invitation_vendor_id"))
-    @Enumerated(EnumType.STRING)
-    @Column(name = "location", nullable = false)
-    private List<PreferredLocation> preferredLocations = new ArrayList<>();
+    @Column(name = "service_coverage_locations", columnDefinition = "TEXT",nullable = false)
+    private List<String> serviceCoverageLocations = new ArrayList<>();
 
     @Column(nullable = false)
     private Boolean travelChargesApplicable;
@@ -156,17 +136,11 @@ public class InvitationVendor {
     @Column(columnDefinition = "TEXT")
     private String specialDescription;
 
-    @ElementCollection
-    @CollectionTable(name = "invitation_photos",
-            joinColumns = @JoinColumn(name = "invitation_vendor_id"))
-    @Column(name = "photo_url")
+    @Column(name = "work_photos", columnDefinition = "TEXT")
     private List<String> workPhotos = new ArrayList<>();
 
-    @ElementCollection
-    @CollectionTable(name = "invitation_work_portfolio",
-            joinColumns = @JoinColumn(name = "invitation_vendor_id"))
-    @Column(name = "work_portfolio")
-    private List<String> workPortfolio = new ArrayList<>();
+    @Column(name = "portfolio", columnDefinition = "TEXT")
+    private List<String> portfolio = new ArrayList<>();
 
     // Step 9
     @Column(nullable = false)

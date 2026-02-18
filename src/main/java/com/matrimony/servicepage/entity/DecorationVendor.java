@@ -1,7 +1,6 @@
 package com.matrimony.servicepage.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.matrimony.servicepage.enums.*;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -34,10 +33,7 @@ public class DecorationVendor {
     @Column(nullable = false)
     private String contactPersonName;
 
-    @ElementCollection
-    @CollectionTable(name = "decoration_type",
-            joinColumns = @JoinColumn(name = "decoration_vendor_id"))
-    @Column(name = "type_of_decoration_services")
+    @Column(name = "type_of_decoration_services", columnDefinition = "TEXT",nullable = false)
     private List<String> typeOfDecorationServices = new ArrayList<>();
 
     private String other;
@@ -64,8 +60,8 @@ public class DecorationVendor {
     private Integer pinCode;
 
     // Step 3
-    @Enumerated(EnumType.STRING)
-    private BusinessType businessType;
+    @Column(name = "business_type", columnDefinition = "TEXT",nullable = false)
+    private String businessType;
 
     private String gstNumber;
 
@@ -76,27 +72,15 @@ public class DecorationVendor {
     private Integer yearsOfExperience;
 
     // Step 4
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "decoration_style",
-            joinColumns = @JoinColumn(name = "decoration_vendor_id"))
-    @Enumerated(EnumType.STRING)
-    @Column(name = "decoration_styles_offered")
-    private List<DecorationStylesOffered> decorationStylesOffered = new ArrayList<>();
+    @Column(name = "decoration_styles_offered", columnDefinition = "TEXT",nullable = false)
+    private List<String> decorationStylesOffered = new ArrayList<>();
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "decoration_material_used",
-            joinColumns = @JoinColumn(name = "decoration_vendor_id"))
-    @Enumerated(EnumType.STRING)
-    @Column(name = "materials_used")
-    private List<MaterialsUsed> materialsUsed = new ArrayList<>();
+    @Column(name = "materials_used", columnDefinition = "TEXT",nullable = false)
+    private List<String> materialsUsed = new ArrayList<>();
 
     // Step 5
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "decoration_services_included",
-            joinColumns = @JoinColumn(name = "decoration_vendor_id"))
-    @Enumerated(EnumType.STRING)
-    @Column(name = "services_included")
-    private List<ServicesIncluded> servicesIncluded = new ArrayList<>();
+    @Column(name = "services_included", columnDefinition = "TEXT",nullable = false)
+    private List<String> servicesIncluded = new ArrayList<>();
 
     private Integer setupTimeRequired;
 
@@ -112,12 +96,8 @@ public class DecorationVendor {
     private Boolean advancePaymentRequired;
 
     // Step 7
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "decoration_preferred_locations",
-            joinColumns = @JoinColumn(name = "decoration_vendor_id"))
-    @Enumerated(EnumType.STRING)
-    @Column(name = "location")
-    private List<PreferredLocation> preferredLocations = new ArrayList<>();
+    @Column(name = "preferred_locations", columnDefinition = "TEXT",nullable = false)
+    private List<String> preferredLocations = new ArrayList<>();
 
     @Column(nullable = false)
     private Boolean transportationChargesApplicable;
@@ -125,16 +105,10 @@ public class DecorationVendor {
     @Column(columnDefinition = "TEXT")
     private String specialDescription;
 
-    @ElementCollection
-    @CollectionTable(name = "decoration_photos",
-            joinColumns = @JoinColumn(name = "decoration_vendor_id"))
-    @Column(name = "photo_url")
+    @Column(name = "decoration_photos", columnDefinition = "TEXT")
     private List<String> decorationPhotos = new ArrayList<>();
 
-    @ElementCollection
-    @CollectionTable(name = "decoration_portfolio",
-            joinColumns = @JoinColumn(name = "decoration_vendor_id"))
-    @Column(name = "portfolio")
+    @Column(name = "portfolio", columnDefinition = "TEXT")
     private List<String> portfolio = new ArrayList<>();
 
     // Step 8
@@ -153,11 +127,8 @@ public class DecorationVendor {
     @Column(name = "google_maps_link", length = 500)
     private String googleMapsLink;
 
-    @ElementCollection
-    @CollectionTable(name = "decoration_social_links",
-            joinColumns = @JoinColumn(name = "decoration_vendor_id"))
-    @Column(name = "social_link")
-    private List<String> socialMediaLinks = new ArrayList<>();
+    @Column(name = "sample_work_link", length = 500)
+    private String sampleWorkLink;
 
     // Step 10
     @Column(nullable = false)

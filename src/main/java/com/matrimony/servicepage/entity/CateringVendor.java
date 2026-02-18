@@ -1,13 +1,10 @@
 package com.matrimony.servicepage.entity;
 
-import com.matrimony.servicepage.enums.*;
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
-import java.math.BigDecimal;
 
 @Entity
 @Table(name = "catering_vendors")
@@ -16,41 +13,33 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CateringVendor {
+public class CateringVendor{
 
     @Id
     @Column(name = "catering_vendor_id", nullable = false, unique = true, length = 30)
     private String cateringVendorId;
 
-    // Vendor mapping (generated from Vendor class)
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "vendor_id", referencedColumnName = "vendor_id", nullable = false, unique = true)
     private Vendor vendor;
 
-    // =============================
     // Step 1 - Basic
-    // =============================
     @Column(nullable = false)
     private String companyName;
 
     @Column(nullable = false)
     private String contactPerson;
 
-    @ElementCollection
-    @CollectionTable(name = "caterer_types",
-            joinColumns = @JoinColumn(name = "catering_vendor_id"))
-    @Column(name = "type_of_catering", nullable = false)
+    @Column(name = "type_of_catering", columnDefinition = "TEXT",nullable = false)
     private List<String> typeOfCatering = new ArrayList<>();
 
     private String otherCateringType;
 
-    // =============================
     // Step 2 - Contact
-    // =============================
     @Column(nullable = false)
-    private String mobileNumber;
+    private Long mobileNumber;
 
-    private String alternateMobileNumber;
+    private Long alternateMobileNumber;
 
     @Column(nullable = false)
     private String emailId;
@@ -67,11 +56,9 @@ public class CateringVendor {
     @Column(nullable = false)
     private Integer pinCode;
 
-    // =============================
     // Step 3 - Business
-    // =============================
-    @Enumerated(EnumType.STRING)
-    private BusinessType businessType;
+    @Column(name = "business_type", columnDefinition = "TEXT",nullable = false)
+    private String businessType;
 
     private String gstNumber;
 
@@ -83,38 +70,24 @@ public class CateringVendor {
     @Column(nullable = false)
     private Integer yearOfExperience;
 
-    // =============================
     // Step 4 - Cuisine
-    // =============================
-
-    @ElementCollection
-    @CollectionTable(name = "catering_cuisines",
-            joinColumns = @JoinColumn(name = "catering_vendor_id"))
-    @Enumerated(EnumType.STRING)
-    @Column(name = "cuisine_type")
-    private List<CuisinesOfOffered> cuisinesOffered = new ArrayList<>();
+    @Column(name = "cuisines_offered", columnDefinition = "TEXT",nullable = false)
+    private List<String> cuisinesOffered = new ArrayList<>();
 
     private String otherCuisine;
 
-    @ElementCollection
-    @CollectionTable(name = "catering_special_menus",
-            joinColumns = @JoinColumn(name = "catering_vendor_id"))
-    @Enumerated(EnumType.STRING)
-    @Column(name = "special_menu")
-    private List<SpecialMenusAvailable> specialMenusAvailable = new ArrayList<>();
+    @Column(name = "special_menus_available", columnDefinition = "TEXT",nullable = false)
+    private List<String> specialMenusAvailable = new ArrayList<>();
 
-    // =============================
     // Step 5 - Capacity
-    // =============================
     @Column(nullable = false)
     private Integer minPlateCapacity;
 
     @Column(nullable = false)
     private Integer maxPlateCapacity;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private ServiceType serviceType;
+    @Column(name = "service_type", columnDefinition = "TEXT",nullable = false)
+    private String serviceType;
 
     @Column(nullable = false)
     private Boolean servingStaffProvided;
@@ -122,9 +95,7 @@ public class CateringVendor {
     @Column(nullable = false)
     private Boolean uniformedStaff;
 
-    // =============================
     // Step 6 - Pricing
-    // =============================
     @Column(nullable = false)
     private Integer pricePerPlateFrom;
 
@@ -136,9 +107,7 @@ public class CateringVendor {
 
     private String balancePaymentTerms;
 
-    // =============================
     // Step 7 - Hygiene
-    // =============================
     @Column(nullable = false)
     private Boolean fssaiCompliance;
 
@@ -151,16 +120,9 @@ public class CateringVendor {
     @Column(nullable = false)
     private Boolean wasteManagementArranged;
 
-    // =============================
     // Step 8 - Coverage
-    // =============================
-
-    @ElementCollection
-    @CollectionTable(name = "catering_preferred_locations",
-            joinColumns = @JoinColumn(name = "catering_vendor_id"))
-    @Enumerated(EnumType.STRING)
-    @Column(name = "preferred_location")
-    private Set<PreferredLocation> preferredLocations = new HashSet<>();
+    @Column(name = "preferred_locations", columnDefinition = "TEXT",nullable = false)
+    private List<String> preferredLocations = new ArrayList<>();
 
     @Column(nullable = false)
     private Boolean transportationChargesApplicable;
@@ -168,29 +130,19 @@ public class CateringVendor {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    @ElementCollection
-    @CollectionTable(name = "catering_work_photos",
-            joinColumns = @JoinColumn(name = "catering_vendor_id"))
-    @Column(name = "photo_path")
-    private List<String> workPhotoPaths = new ArrayList<>();
+    @Column(name = "work_Photo", columnDefinition = "TEXT")
+    private List<String> workPhoto = new ArrayList<>();
 
-    @ElementCollection
-    @CollectionTable(name = "catering_portfolio_links",
-            joinColumns = @JoinColumn(name = "catering_vendor_id"))
-    @Column(name = "link")
-    private List<String> portfolioLinks = new ArrayList<>();
+    @Column(name = "portfolio", columnDefinition = "TEXT")
+    private List<String> portfolio = new ArrayList<>();
 
-    // =============================
     // Step 9 - Experience
-    // =============================
     @Column(nullable = false)
     private Long numberOfWeddingsCatered;
 
     private String references;
 
-    // =============================
     // Step 10 - Bank
-    // =============================
     @Column(nullable = false)
     private String accountHolderName;
 
@@ -217,9 +169,7 @@ public class CateringVendor {
     @Column(nullable = false)
     private String place;
 
-    // =============================
     // Timestamps
-    // =============================
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 

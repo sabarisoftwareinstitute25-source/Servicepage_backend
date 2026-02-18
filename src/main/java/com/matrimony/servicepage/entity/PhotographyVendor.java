@@ -1,13 +1,12 @@
 package com.matrimony.servicepage.entity;
 
-import com.matrimony.servicepage.enums.BusinessType;
-import com.matrimony.servicepage.enums.PreferredLocation;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -34,11 +33,8 @@ public class PhotographyVendor {
     @Column(nullable = false)
     private String ownerName;
 
-    @ElementCollection
-    @CollectionTable(name = "photographer_services",
-            joinColumns = @JoinColumn(name = "photography_vendor_id"))
-    @Column(name = "service_name", nullable = false)
-    private List<String> typeOfServices;
+    @Column(name = "type_of_service", columnDefinition = "TEXT",nullable = false)
+    private List<String> typeOfService = new ArrayList<>();
 
     private String otherService;
 
@@ -64,8 +60,8 @@ public class PhotographyVendor {
     private Integer pinCode;
 
     // Step 3
-    @Enumerated(EnumType.STRING)
-    private BusinessType businessType;
+    @Column(name = "business_type", columnDefinition = "TEXT",nullable = false)
+    private String businessType;
 
     private String gstNumber;
 
@@ -89,29 +85,19 @@ public class PhotographyVendor {
     private Boolean backupEquipmentAvailable;
 
     // Step 5
-    @ElementCollection
-    @CollectionTable(name = "photography_coverage_locations",
-            joinColumns = @JoinColumn(name = "photography_vendor_id"))
-    @Enumerated(EnumType.STRING)
-    @Column(name = "location")
-    private List<PreferredLocation> preferredLocations;
+    @Column(name = "preferred_locations", columnDefinition = "TEXT",nullable = false)
+    private List<String> preferredLocations = new ArrayList<>();
 
     private Boolean travelChargesApplicable;
 
     @Column(length = 2000)
     private String specialDescription;
 
-    @ElementCollection
-    @CollectionTable(name = "photography_work_photos",
-            joinColumns = @JoinColumn(name = "photography_vendor_id"))
-    @Column(name = "photo_path")
-    private List<String> workPhotoPaths;
+    @Column(name = "work_photos", columnDefinition = "TEXT")
+    private List<String> workPhotos = new ArrayList<>();
 
-    @ElementCollection
-    @CollectionTable(name = "photography_portfolio_links",
-            joinColumns = @JoinColumn(name = "photography_vendor_id"))
-    @Column(name = "link")
-    private List<String> portfolioLinks;
+    @Column(name = "portfolio", columnDefinition = "TEXT")
+    private List<String> portfolio = new ArrayList<>();
 
     // Step 6
     @Column(nullable = false)

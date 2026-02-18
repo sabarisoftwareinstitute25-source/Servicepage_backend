@@ -1,7 +1,6 @@
 package com.matrimony.servicepage.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.matrimony.servicepage.enums.*;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -34,19 +33,16 @@ public class WeddingHallVendor {
     @Column(nullable = false)
     private String ownerName;
 
-    @ElementCollection
-    @CollectionTable(name = "weddinghall_type",
-            joinColumns = @JoinColumn(name = "weddinghall_vendor_id"))
-    @Column(name = "type_of_venue")
+    @Column(name = "type_of_venue", columnDefinition = "TEXT",nullable = false)
     private List<String> typeOfVenue = new ArrayList<>();
 
     private String other;
 
     // Step 2
     @Column(nullable = false)
-    private String mobileNumber;
+    private Long mobileNumber;
 
-    private String alternateMobileNumber;
+    private Long alternateMobileNumber;
 
     @Column(nullable = false)
     private String emailId;
@@ -64,8 +60,8 @@ public class WeddingHallVendor {
     private Integer pinCode;
 
     // Step 3
-    @Enumerated(EnumType.STRING)
-    private BusinessType businessType;
+    @Column(name = "business_type", columnDefinition = "TEXT",nullable = false)
+    private String businessType;
 
     private String gstNumber;
 
@@ -86,12 +82,8 @@ public class WeddingHallVendor {
 
     private Integer numberOfFloors;
 
-    @ElementCollection
-    @CollectionTable(name = "weddinghall_facilities_available",
-            joinColumns = @JoinColumn(name = "weddinghall_vendor_id"))
-    @Enumerated(EnumType.STRING)
-    @Column(name = "facilities_available")
-    private List<FacilitiesAvailable> facilitiesavailable = new ArrayList<>();
+    @Column(name = "facilities_available", columnDefinition = "TEXT",nullable = false)
+    private List<String> facilitiesAvailable = new ArrayList<>();
 
     // Step 5
     private Integer numberOfRoomsAvailable;
@@ -104,41 +96,19 @@ public class WeddingHallVendor {
 
     // Step 6 - Service Coverage
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(
-            name = "weddinghall_events",
-            joinColumns = @JoinColumn(name = "weddinghall_vendor_id")
-    )
-    @Enumerated(EnumType.STRING)
-    @Column(name = "event_type")
-    private Set<EventsAllowed> eventsAllowed = new HashSet<>();
+    @Column(name = "events_allowed", columnDefinition = "TEXT",nullable = false)
+    private List<String> eventsAllowed = new ArrayList<>();
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(
-            name = "weddinghall_time_slots",
-            joinColumns = @JoinColumn(name = "weddinghall_vendor_id")
-    )
-    @Enumerated(EnumType.STRING)
-    @Column(name = "time_slot")
-    private Set<TimeSlotsAvailable> timeSlotsAvailable = new HashSet<>();
+    @Column(name = "time_slots_available", columnDefinition = "TEXT",nullable = false)
+    private List<String> timeSlotsAvailable = new ArrayList<>();
 
     @Column(length = 2000)
     private String specialDescription;
 
-    @ElementCollection
-    @CollectionTable(
-            name = "weddinghall_photos",
-            joinColumns = @JoinColumn(name = "weddinghall_vendor_id")
-    )
-    @Column(name = "photo_url")
+    @Column(name = "venue_photos", columnDefinition = "TEXT")
     private List<String> venuePhotos = new ArrayList<>();
 
-    @ElementCollection
-    @CollectionTable(
-            name = "weddinghall_links",
-            joinColumns = @JoinColumn(name = "weddinghall_vendor_id")
-    )
-    @Column(name = "venue_link")
+    @Column(name = "venue_links", columnDefinition = "TEXT")
     private List<String> venueLinks = new ArrayList<>();
 
     // Step 7
@@ -181,13 +151,8 @@ public class WeddingHallVendor {
     @Column(name = "google_maps_link", length = 500)
     private String googleMapsLink;
 
-    @ElementCollection
-    @CollectionTable(
-            name = "weddinghall_social_links",
-            joinColumns = @JoinColumn(name = "weddinghall_vendor_id")
-    )
-    @Column(name = "social_link")
-    private List<String> socialMediaLinks = new ArrayList<>();
+    @Column(name = "social_media_links", length = 500)
+    private String socialMediaLinks;
 
     // Step 10
     @Column(nullable = false)

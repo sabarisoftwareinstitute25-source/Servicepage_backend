@@ -1,7 +1,6 @@
 package com.matrimony.servicepage.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.matrimony.servicepage.enums.*;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -34,10 +33,7 @@ public class StylingVendor {
     @Column(nullable = false)
     private String leadStylistName;
 
-    @ElementCollection
-    @CollectionTable(name = "styling_services",
-            joinColumns = @JoinColumn(name = "styling_vendor_id"))
-    @Column(name = "type_of_styling_services_provided", nullable = false)
+    @Column(name = "type_of_styling_services_provided", columnDefinition = "TEXT",nullable = false)
     private List<String> typeOfStylingServicesProvided = new ArrayList<>();
 
     private String other;
@@ -64,8 +60,8 @@ public class StylingVendor {
     private Integer pinCode;
 
     // Step 3
-    @Enumerated(EnumType.STRING)
-    private BusinessType businessType;
+    @Column(name = "business_type", columnDefinition = "TEXT",nullable = false)
+    private String businessType;
 
     private String gstNumber;
 
@@ -77,28 +73,16 @@ public class StylingVendor {
     @Column(nullable = false)
     private Integer yearsOfExperience;
 
-    // Step 4 (FIXED: Added @Enumerated)
-    @ElementCollection
-    @CollectionTable(name = "styling_bridal_makeup_styles",
-            joinColumns = @JoinColumn(name = "styling_vendor_id"))
-    @Enumerated(EnumType.STRING)
-    @Column(name = "bridal_makeup_styles", nullable = false)
-    private List<BridalMakeupStyles> bridalMakeupStyles = new ArrayList<>();
+    // Step 4
+    @Column(name = "bridal_makeup_styles", columnDefinition = "TEXT",nullable = false)
+    private List<String> bridalMakeupStyles = new ArrayList<>();
 
-    @ElementCollection
-    @CollectionTable(name = "styling_groom_styling_services",
-            joinColumns = @JoinColumn(name = "styling_vendor_id"))
-    @Enumerated(EnumType.STRING)
-    @Column(name = "groom_styling_services", nullable = false)
-    private List<GroomStylingServices> groomStylingServices = new ArrayList<>();
+    @Column(name = "groom_styling_services", columnDefinition = "TEXT",nullable = false)
+    private List<String> groomStylingServices = new ArrayList<>();
 
-    // Step 5 (FIXED: Added @Enumerated)
-    @ElementCollection
-    @CollectionTable(name = "styling_products_used",
-            joinColumns = @JoinColumn(name = "styling_vendor_id"))
-    @Enumerated(EnumType.STRING)
-    @Column(name = "products_used", nullable = false)
-    private List<ProductsUsed> productsUsed = new ArrayList<>();
+    // Step 5
+    @Column(name = "products_used", columnDefinition = "TEXT",nullable = false)
+    private List<String> productsUsed = new ArrayList<>();
 
     private String otherPremiumBrands;
 
@@ -119,12 +103,8 @@ public class StylingVendor {
     private Boolean backupArtistAvailable;
 
     // Step 7
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "styling_preferred_locations",
-            joinColumns = @JoinColumn(name = "styling_vendor_id"))
-    @Enumerated(EnumType.STRING)
-    @Column(name = "location", nullable = false)
-    private List<PreferredLocation> preferredLocations = new ArrayList<>();
+    @Column(name = "preferred_locations", columnDefinition = "TEXT",nullable = false)
+    private List<String> preferredLocations = new ArrayList<>();
 
     @Column(nullable = false)
     private Boolean travelChargesApplicable;
@@ -132,17 +112,11 @@ public class StylingVendor {
     @Column(columnDefinition = "TEXT")
     private String specialDescription;
 
-    @ElementCollection
-    @CollectionTable(name = "styling_photos",
-            joinColumns = @JoinColumn(name = "styling_vendor_id"))
-    @Column(name = "photo_url")
+    @Column(name = "work_photos", columnDefinition = "TEXT")
     private List<String> workPhotos = new ArrayList<>();
 
-    @ElementCollection
-    @CollectionTable(name = "styling_work_portfolio",
-            joinColumns = @JoinColumn(name = "styling_vendor_id"))
-    @Column(name = "work_portfolio")
-    private List<String> workPortfolio = new ArrayList<>();
+    @Column(name = "portfolio", columnDefinition = "TEXT",nullable = false)
+    private List<String> portfolio = new ArrayList<>();
 
     // Step 8
     @Column(nullable = false)
