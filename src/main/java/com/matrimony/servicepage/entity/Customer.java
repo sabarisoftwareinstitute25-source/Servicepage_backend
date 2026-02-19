@@ -1,26 +1,37 @@
 package com.matrimony.servicepage.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
 @Table(name = "customers")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Customer {
 
     @Id
-    private String customerId; //EIS+yyyy+C+mm+000001
+    @Column(name = "customer_id", length = 25)
+    private String customerId;  // EIS+yyyy+C+mm+000001
 
     @Column(nullable = false)
     private String fullName;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true, length = 15)
     private String mobileNumber;
 
     @Column(nullable = false)
     private String password;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String confirmPassword;
+    private Status status;
+
+    public enum Status {
+        ACTIVE,
+        INACTIVE,
+        PENDING
+    }
 }

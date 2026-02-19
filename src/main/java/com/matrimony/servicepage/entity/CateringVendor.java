@@ -13,29 +13,30 @@ import java.util.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CateringVendor{
+public class CateringVendor {
 
     @Id
-    @Column(name = "catering_vendor_id", nullable = false, unique = true, length = 30)
+    @Column(name = "catering_vendor_id", nullable = false, unique = true, length = 20)
     private String cateringVendorId;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "vendor_id", referencedColumnName = "vendor_id", nullable = false, unique = true)
+    @JoinColumn(name = "vendor_id", nullable = false, unique = true)
     private Vendor vendor;
 
-    // Step 1 - Basic
+    // Step 1
     @Column(nullable = false)
     private String companyName;
 
     @Column(nullable = false)
     private String contactPerson;
 
-    @Column(name = "type_of_catering", columnDefinition = "TEXT",nullable = false)
+    // FIXED
+    @Column(name = "type_of_catering",columnDefinition = "TEXT",nullable = false)
     private List<String> typeOfCatering = new ArrayList<>();
 
     private String otherCateringType;
 
-    // Step 2 - Contact
+    // Step 2
     @Column(nullable = false)
     private Long mobileNumber;
 
@@ -56,8 +57,8 @@ public class CateringVendor{
     @Column(nullable = false)
     private Integer pinCode;
 
-    // Step 3 - Business
-    @Column(name = "business_type", columnDefinition = "TEXT",nullable = false)
+    // Step 3
+    @Column(nullable = false)
     private String businessType;
 
     private String gstNumber;
@@ -70,23 +71,23 @@ public class CateringVendor{
     @Column(nullable = false)
     private Integer yearOfExperience;
 
-    // Step 4 - Cuisine
-    @Column(name = "cuisines_offered", columnDefinition = "TEXT",nullable = false)
+    // Step 4
+    @Column(name = "cuisines_offered",columnDefinition = "TEXT", nullable = false)
     private List<String> cuisinesOffered = new ArrayList<>();
 
     private String otherCuisine;
 
-    @Column(name = "special_menus_available", columnDefinition = "TEXT",nullable = false)
+    @Column(name = "special_menus_available",columnDefinition = "TEXT", nullable = false)
     private List<String> specialMenusAvailable = new ArrayList<>();
 
-    // Step 5 - Capacity
+    // Step 5
     @Column(nullable = false)
     private Integer minPlateCapacity;
 
     @Column(nullable = false)
     private Integer maxPlateCapacity;
 
-    @Column(name = "service_type", columnDefinition = "TEXT",nullable = false)
+    @Column(nullable = false)
     private String serviceType;
 
     @Column(nullable = false)
@@ -95,7 +96,7 @@ public class CateringVendor{
     @Column(nullable = false)
     private Boolean uniformedStaff;
 
-    // Step 6 - Pricing
+    // Step 6
     @Column(nullable = false)
     private Integer pricePerPlateFrom;
 
@@ -107,7 +108,7 @@ public class CateringVendor{
 
     private String balancePaymentTerms;
 
-    // Step 7 - Hygiene
+    // Step 7
     @Column(nullable = false)
     private Boolean fssaiCompliance;
 
@@ -120,8 +121,8 @@ public class CateringVendor{
     @Column(nullable = false)
     private Boolean wasteManagementArranged;
 
-    // Step 8 - Coverage
-    @Column(name = "preferred_locations", columnDefinition = "TEXT",nullable = false)
+    // Step 8
+    @Column(name = "preferred_locations",columnDefinition = "TEXT", nullable = false)
     private List<String> preferredLocations = new ArrayList<>();
 
     @Column(nullable = false)
@@ -130,19 +131,20 @@ public class CateringVendor{
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    @Column(name = "work_Photo", columnDefinition = "TEXT")
+
+    @Column(name = "photo_path",columnDefinition = "TEXT")
     private List<String> workPhoto = new ArrayList<>();
 
-    @Column(name = "portfolio", columnDefinition = "TEXT")
+    @Column(name = "portfolio_path",columnDefinition = "TEXT")
     private List<String> portfolio = new ArrayList<>();
 
-    // Step 9 - Experience
+    // Step 9
     @Column(nullable = false)
     private Long numberOfWeddingsCatered;
 
-    private String references;
+    private String majorClients;
 
-    // Step 10 - Bank
+    // Step 10
     @Column(nullable = false)
     private String accountHolderName;
 

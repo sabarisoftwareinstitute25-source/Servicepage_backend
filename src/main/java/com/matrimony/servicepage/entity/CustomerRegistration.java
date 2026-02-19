@@ -1,9 +1,7 @@
 package com.matrimony.servicepage.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -12,7 +10,20 @@ import java.util.List;
 
 @Entity
 @Table(name = "customer_registration")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class CustomerRegistration {
+
+    @Id
+    @Column(name = "customer_registration_id", length = 25)
+    private String customerRegistrationId;
+
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "customer_id", unique = true)
+    private Customer customer;
 
     // Step 1
     @Column(nullable = false)
@@ -31,15 +42,10 @@ public class CustomerRegistration {
     private String religion;
 
     private String caste;
-
     private String motherTongue;
-
     private String bodyType;
-
     private String height;
-
     private Integer weight;
-
     private String complexion;
 
     // Step 2
@@ -83,9 +89,7 @@ public class CustomerRegistration {
     private String occupation;
 
     private String company;
-
     private Integer annualIncome;
-
     private String workLocation;
 
     // Step 5
@@ -120,7 +124,7 @@ public class CustomerRegistration {
     private Integer expectedNumberOfGuests;
 
     // Step 7
-    @Column(name = "wedding_event_service", columnDefinition = "TEXT", nullable = false)
+    @Column(name = "wedding_event_service",nullable = false)
     private List<String> weddingEventService = new ArrayList<>();
 
     // Step 8
@@ -145,10 +149,20 @@ public class CustomerRegistration {
     @Column(nullable = false)
     private String place;
 
+    // Audit Fields
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = LocalDateTime.now();
+    }
 }

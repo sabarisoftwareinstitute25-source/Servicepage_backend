@@ -17,8 +17,8 @@ import java.time.LocalDateTime;
 public class Vendor {
 
     @Id
-    @Column(name = "vendor_id", nullable = false, length = 30)
-    private String vendorId;   // Example: VEN20260001
+    @Column(name = "vendor_id", length = 20)
+    private String vendorId;   // Example: EIS+yyyy+V+mm+0001
 
     @Column(name = "vendor_name", nullable = false, length = 120)
     private String vendorName;
