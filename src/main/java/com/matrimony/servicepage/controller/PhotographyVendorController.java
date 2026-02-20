@@ -1,8 +1,12 @@
 package com.matrimony.servicepage.controller;
 
+import com.matrimony.servicepage.dto.PhotographyVendorFilterRequest;
 import com.matrimony.servicepage.entity.PhotographyVendor;
 import com.matrimony.servicepage.service.PhotographyVendorService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,5 +37,14 @@ public class PhotographyVendorController {
     public String delete(@PathVariable String id) {
         service.delete(id);
         return "Deleted Successfully";
+    }
+
+    // Filter
+
+    @PostMapping("/filter")
+    public List<PhotographyVendor> filterVendors(
+            @RequestBody PhotographyVendorFilterRequest request) {
+
+        return service.filterVendors(request);
     }
 }

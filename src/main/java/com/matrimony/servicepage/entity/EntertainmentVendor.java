@@ -33,7 +33,12 @@ public class EntertainmentVendor {
     @Column(nullable = false)
     private String contactPersonName;
 
-    @Column(name = "type_of_entertainment_services", columnDefinition = "TEXT",nullable = false)
+    @ElementCollection
+    @CollectionTable(
+            name = "entertainment_vendor_service",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "type_of_entertainment_services", nullable = false)
     private List<String> typeOfEntertainmentServices = new ArrayList<>();
 
     private String other;
@@ -72,7 +77,12 @@ public class EntertainmentVendor {
     private Integer yearsOfExperience;
 
     // Step 4
-    @Column(name = "events_covered", columnDefinition = "TEXT",nullable = false)
+    @ElementCollection
+    @CollectionTable(
+            name = "entertainment_vendor_events_covered",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "events_covered", nullable = false)
     private List<String> eventsCovered = new ArrayList<>();
 
     @Column(nullable = false)
@@ -107,7 +117,12 @@ public class EntertainmentVendor {
     private Boolean setup;
 
     // Step 7
-    @Column(name = "preferred_locations", columnDefinition = "TEXT",nullable = false)
+    @ElementCollection
+    @CollectionTable(
+            name = "entertainment_vendor_preferred_locations",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "preferred_locations")
     private List<String> preferredLocations = new ArrayList<>();
 
     @Column(nullable = false)
@@ -119,10 +134,20 @@ public class EntertainmentVendor {
     @Column(columnDefinition = "TEXT")
     private String specialDescription;
 
-    @Column(name = "performance_photos", columnDefinition = "TEXT")
+    @ElementCollection
+    @CollectionTable(
+            name = "entertainment_vendor_performance_photos",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "performance_photos")
     private List<String> performancePhotos = new ArrayList<>();
 
-    @Column(name = "portfolio", columnDefinition = "TEXT")
+    @ElementCollection
+    @CollectionTable(
+            name = "entertainment_vendor_portfolio",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "portfolio")
     private List<String> portfolio = new ArrayList<>();
 
     // Step 8

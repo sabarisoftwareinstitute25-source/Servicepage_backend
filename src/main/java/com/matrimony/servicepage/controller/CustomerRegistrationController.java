@@ -53,4 +53,5 @@ public class CustomerRegistrationController {
         service.delete(id);
         return ResponseEntity.ok("Deleted Successfully");
     }
+
 }

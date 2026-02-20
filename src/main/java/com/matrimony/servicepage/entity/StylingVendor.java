@@ -33,7 +33,12 @@ public class StylingVendor {
     @Column(nullable = false)
     private String leadStylistName;
 
-    @Column(name = "type_of_styling_services_provided", columnDefinition = "TEXT",nullable = false)
+    @ElementCollection
+    @CollectionTable(
+            name = "styling_vendor_services",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "type_of_styling_services_provided", nullable = false)
     private List<String> typeOfStylingServicesProvided = new ArrayList<>();
 
     private String other;
@@ -74,14 +79,29 @@ public class StylingVendor {
     private Integer yearsOfExperience;
 
     // Step 4
-    @Column(name = "bridal_makeup_styles", columnDefinition = "TEXT",nullable = false)
+    @ElementCollection
+    @CollectionTable(
+            name = "styling_vendor_bridal_makeup_styles",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "bridal_makeup_styles", nullable = false)
     private List<String> bridalMakeupStyles = new ArrayList<>();
 
-    @Column(name = "groom_styling_services", columnDefinition = "TEXT",nullable = false)
+    @ElementCollection
+    @CollectionTable(
+            name = "styling_vendor_groom-styling_services",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "groomStylingServices", nullable = false)
     private List<String> groomStylingServices = new ArrayList<>();
 
     // Step 5
-    @Column(name = "products_used", columnDefinition = "TEXT",nullable = false)
+    @ElementCollection
+    @CollectionTable(
+            name = "styling_vendor_products_used",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "productsUsed", nullable = false)
     private List<String> productsUsed = new ArrayList<>();
 
     private String otherPremiumBrands;
@@ -103,7 +123,12 @@ public class StylingVendor {
     private Boolean backupArtistAvailable;
 
     // Step 7
-    @Column(name = "preferred_locations", columnDefinition = "TEXT",nullable = false)
+    @ElementCollection
+    @CollectionTable(
+            name = "styling_vendor_preferred_locations",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "preferred_locations", nullable = false)
     private List<String> preferredLocations = new ArrayList<>();
 
     @Column(nullable = false)
@@ -112,10 +137,20 @@ public class StylingVendor {
     @Column(columnDefinition = "TEXT")
     private String specialDescription;
 
-    @Column(name = "work_photos", columnDefinition = "TEXT")
+    @ElementCollection
+    @CollectionTable(
+            name = "styling_vendor_work_photos",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "work_photos")
     private List<String> workPhotos = new ArrayList<>();
 
-    @Column(name = "portfolio", columnDefinition = "TEXT",nullable = false)
+    @ElementCollection
+    @CollectionTable(
+            name = "styling_vendor_portfolio",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "portfolio")
     private List<String> portfolio = new ArrayList<>();
 
     // Step 8

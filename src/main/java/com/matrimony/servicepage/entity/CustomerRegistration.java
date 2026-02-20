@@ -124,7 +124,12 @@ public class CustomerRegistration {
     private Integer expectedNumberOfGuests;
 
     // Step 7
-    @Column(name = "wedding_event_service",nullable = false)
+    @ElementCollection
+    @CollectionTable(
+            name = "customer_registration_wedding_event_service",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "wedding_event_service", nullable = false)
     private List<String> weddingEventService = new ArrayList<>();
 
     // Step 8

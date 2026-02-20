@@ -2,6 +2,8 @@ package com.matrimony.servicepage.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -28,13 +30,24 @@ public class CateringVendor {
     private String companyName;
 
     @Column(nullable = false)
-    private String contactPerson;
+    private String contactPersonName;
 
     // FIXED
-    @Column(name = "type_of_catering",columnDefinition = "TEXT",nullable = false)
+    @ElementCollection
+    @CollectionTable(
+            name = "catering_vendor_type_of_catering",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "type_of_catering", nullable = false)
     private List<String> typeOfCatering = new ArrayList<>();
 
     private String otherCateringType;
+
+    @Column(nullable = false)
+    private BigDecimal minBudgetRange;
+
+    @Column(nullable = false)
+    private BigDecimal maxBudgetRange;
 
     // Step 2
     @Column(nullable = false)
@@ -66,26 +79,36 @@ public class CateringVendor {
     @Column(nullable = false)
     private String panNumber;
 
-    private String fssaiLicenseNumber;
+    private String FSSAILicenseNumber;
 
     @Column(nullable = false)
     private Integer yearOfExperience;
 
     // Step 4
-    @Column(name = "cuisines_offered",columnDefinition = "TEXT", nullable = false)
+    @ElementCollection
+    @CollectionTable(
+            name = "catering_vendor_cuisines_offered",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "cuisines_offered", nullable = false)
     private List<String> cuisinesOffered = new ArrayList<>();
 
     private String otherCuisine;
 
-    @Column(name = "special_menus_available",columnDefinition = "TEXT", nullable = false)
+    @ElementCollection
+    @CollectionTable(
+            name = "catering_vendor_special_menus_available",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "special_menus_available", nullable = false)
     private List<String> specialMenusAvailable = new ArrayList<>();
 
     // Step 5
     @Column(nullable = false)
-    private Integer minPlateCapacity;
+    private BigDecimal minPlateCapacity;
 
     @Column(nullable = false)
-    private Integer maxPlateCapacity;
+    private BigDecimal maxPlateCapacity;
 
     @Column(nullable = false)
     private String serviceType;
@@ -110,7 +133,7 @@ public class CateringVendor {
 
     // Step 7
     @Column(nullable = false)
-    private Boolean fssaiCompliance;
+    private Boolean FSSAICompliance;
 
     @Column(nullable = false)
     private String foodPreparationLocation;
@@ -122,7 +145,12 @@ public class CateringVendor {
     private Boolean wasteManagementArranged;
 
     // Step 8
-    @Column(name = "preferred_locations",columnDefinition = "TEXT", nullable = false)
+    @ElementCollection
+    @CollectionTable(
+            name = "catering_vendor_preferred_locations",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "preferred_locations", nullable = false)
     private List<String> preferredLocations = new ArrayList<>();
 
     @Column(nullable = false)
@@ -132,10 +160,20 @@ public class CateringVendor {
     private String description;
 
 
-    @Column(name = "photo_path",columnDefinition = "TEXT")
-    private List<String> workPhoto = new ArrayList<>();
+    @ElementCollection
+    @CollectionTable(
+            name = "catering_vendor_work_photos",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "work_photos")
+    private List<String> workPhotos = new ArrayList<>();
 
-    @Column(name = "portfolio_path",columnDefinition = "TEXT")
+    @ElementCollection
+    @CollectionTable(
+            name = "catering_vendor_portfolio",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "portfolio")
     private List<String> portfolio = new ArrayList<>();
 
     // Step 9

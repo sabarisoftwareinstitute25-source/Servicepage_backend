@@ -33,7 +33,12 @@ public class WeddingHallVendor {
     @Column(nullable = false)
     private String ownerName;
 
-    @Column(name = "type_of_venue", columnDefinition = "TEXT",nullable = false)
+    @ElementCollection
+    @CollectionTable(
+            name = "weddinghall_vendor_venue",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "typeOfVenue", nullable = false)
     private List<String> typeOfVenue = new ArrayList<>();
 
     private String other;
@@ -82,7 +87,12 @@ public class WeddingHallVendor {
 
     private Integer numberOfFloors;
 
-    @Column(name = "facilities_available", columnDefinition = "TEXT",nullable = false)
+    @ElementCollection
+    @CollectionTable(
+            name = "weddinghall_vendor_facilities_available",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "facilities_available", nullable = false)
     private List<String> facilitiesAvailable = new ArrayList<>();
 
     // Step 5
@@ -96,19 +106,39 @@ public class WeddingHallVendor {
 
     // Step 6 - Service Coverage
 
-    @Column(name = "events_allowed", columnDefinition = "TEXT",nullable = false)
+    @ElementCollection
+    @CollectionTable(
+            name = "weddinghall_vendor_events_allowed",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "eventsAllowed", nullable = false)
     private List<String> eventsAllowed = new ArrayList<>();
 
-    @Column(name = "time_slots_available", columnDefinition = "TEXT",nullable = false)
+    @ElementCollection
+    @CollectionTable(
+            name = "weddinghall_vendor_time_slots_available",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "time_slots_available", nullable = false)
     private List<String> timeSlotsAvailable = new ArrayList<>();
 
     @Column(length = 2000)
     private String specialDescription;
 
-    @Column(name = "venue_photos", columnDefinition = "TEXT")
+    @ElementCollection
+    @CollectionTable(
+            name = "weddinghall_vendor_venue_photos",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "venue_photos")
     private List<String> venuePhotos = new ArrayList<>();
 
-    @Column(name = "venue_links", columnDefinition = "TEXT")
+    @ElementCollection
+    @CollectionTable(
+            name = "weddinghall_vendor_venue-links",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "venue_links")
     private List<String> venueLinks = new ArrayList<>();
 
     // Step 7

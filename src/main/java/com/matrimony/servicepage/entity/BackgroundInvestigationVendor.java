@@ -30,8 +30,13 @@ public class BackgroundInvestigationVendor {
     @Column(nullable = false)
     private String registeredAgencyName;
 
-    @Column(name = "type_of_entity", columnDefinition = "TEXT",nullable = false)
-    private List<String> typeofEntity = new ArrayList<>();
+    @ElementCollection
+    @CollectionTable(
+            name = "background_investigation_type_of_entity",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "type_of_entity", nullable = false)
+    private List<String> typeOfEntity = new ArrayList<>();
 
     @Column(nullable = false)
     private Integer yearOfEstablishment;
@@ -89,7 +94,12 @@ public class BackgroundInvestigationVendor {
     private String emailId;
 
     // Step 5
-    @Column(name = "matrimonial_verification_checks", columnDefinition = "TEXT",nullable = false)
+    @ElementCollection
+    @CollectionTable(
+            name = "background_investigation_matrimonial_verification_checks",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "matrimonial_verification_checks", nullable = false)
     private List<String> matrimonialVerificationChecks = new ArrayList<>();
 
     @Column(nullable = false)
@@ -111,11 +121,21 @@ public class BackgroundInvestigationVendor {
     private String referenceContact;
 
     // Step 7
-    @Column(name = "compliance_and_confidentiality", columnDefinition = "TEXT",nullable = false)
+    @ElementCollection
+    @CollectionTable(
+            name = "background_investigation_compliance_and_confidentiality",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "compliance_and_confidentiality", nullable = false)
     private List<String> complianceAndConfidentiality = new ArrayList<>();
 
     // Step 8
-    @Column(name = "upload_documents", columnDefinition = "TEXT",nullable = false)
+    @ElementCollection
+    @CollectionTable(
+            name = "background_investigation_upload_documents",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "upload_documents")
     private List<String> uploadDocuments = new ArrayList<>();
 
     // Step 9

@@ -1,8 +1,13 @@
 package com.matrimony.servicepage.service;
 
+import com.matrimony.servicepage.dto.PhotographyVendorFilterRequest;
 import com.matrimony.servicepage.entity.PhotographyVendor;
 import com.matrimony.servicepage.repository.PhotographyVendorRepository;
+import com.matrimony.servicepage.specification.PhotographyVendorSpecification;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,5 +33,15 @@ public class PhotographyVendorService {
 
     public void delete(String id) {
         repository.deleteById(id);
+    }
+
+    // Filter
+
+    public List<PhotographyVendor> filterVendors(PhotographyVendorFilterRequest request) {
+
+        Specification<PhotographyVendor> spec =
+                PhotographyVendorSpecification.filter(request);
+
+        return repository.findAll(spec);
     }
 }

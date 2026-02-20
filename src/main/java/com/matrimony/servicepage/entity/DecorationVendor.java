@@ -33,7 +33,12 @@ public class DecorationVendor {
     @Column(nullable = false)
     private String contactPersonName;
 
-    @Column(name = "type_of_decoration_services", columnDefinition = "TEXT",nullable = false)
+    @ElementCollection
+    @CollectionTable(
+            name = "decoration_vendor_type_of_services",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "type_of_decoration_services", nullable = false)
     private List<String> typeOfDecorationServices = new ArrayList<>();
 
     private String other;
@@ -72,10 +77,20 @@ public class DecorationVendor {
     private Integer yearsOfExperience;
 
     // Step 4
-    @Column(name = "decoration_styles_offered", columnDefinition = "TEXT",nullable = false)
+    @ElementCollection
+    @CollectionTable(
+            name = "decoration_vendor_styles_offered",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "decoration_styles_offered", nullable = false)
     private List<String> decorationStylesOffered = new ArrayList<>();
 
-    @Column(name = "materials_used", columnDefinition = "TEXT",nullable = false)
+    @ElementCollection
+    @CollectionTable(
+            name = "decoration_vendor_materials-used",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "materials_used", nullable = false)
     private List<String> materialsUsed = new ArrayList<>();
 
     // Step 5
@@ -105,10 +120,20 @@ public class DecorationVendor {
     @Column(columnDefinition = "TEXT")
     private String specialDescription;
 
-    @Column(name = "decoration_photos", columnDefinition = "TEXT")
+    @ElementCollection
+    @CollectionTable(
+            name = "decoration_vendor_decoration_Photos",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "decoration_photos")
     private List<String> decorationPhotos = new ArrayList<>();
 
-    @Column(name = "portfolio", columnDefinition = "TEXT")
+    @ElementCollection
+    @CollectionTable(
+            name = "decoration_vendor_portfolio",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "portfolio")
     private List<String> portfolio = new ArrayList<>();
 
     // Step 8

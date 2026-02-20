@@ -1,5 +1,6 @@
 package com.matrimony.servicepage.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "photography_vendors")
 @Getter
@@ -33,10 +35,21 @@ public class PhotographyVendor {
     @Column(nullable = false)
     private String ownerName;
 
-    @Column(name = "type_of_service", columnDefinition = "TEXT",nullable = false)
-    private List<String> typeOfService = new ArrayList<>();
+    @ElementCollection
+    @CollectionTable(
+            name = "photography_vendor_services",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "type_of_service", nullable = false)
+    private List<String> typeOfServices = new ArrayList<>();
 
     private String otherService;
+
+    @Column(nullable = false)
+    private BigDecimal minBudgetRange;
+
+    @Column(nullable = false)
+    private BigDecimal maxBudgetRange;
 
     // Step 2
     @Column(nullable = false)
@@ -85,7 +98,12 @@ public class PhotographyVendor {
     private Boolean backupEquipmentAvailable;
 
     // Step 5
-    @Column(name = "preferred_locations", columnDefinition = "TEXT",nullable = false)
+    @ElementCollection
+    @CollectionTable(
+            name = "photography_vendor_preferred_locations",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "preferred_locations", nullable = false)
     private List<String> preferredLocations = new ArrayList<>();
 
     private Boolean travelChargesApplicable;
@@ -93,11 +111,21 @@ public class PhotographyVendor {
     @Column(length = 2000)
     private String specialDescription;
 
-    @Column(name = "work_photos", columnDefinition = "TEXT")
+    @ElementCollection
+    @CollectionTable(
+            name = "photography_vendor_work_photos",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "work_photos")
     private List<String> workPhotos = new ArrayList<>();
 
-    @Column(name = "portfolio", columnDefinition = "TEXT")
-    private List<String> portfolio = new ArrayList<>();
+    @ElementCollection
+    @CollectionTable(
+            name = "photography_vendor_portfolio",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "portfolio")
+    private List<String> portfolio =new ArrayList<>();
 
     // Step 6
     @Column(nullable = false)

@@ -33,7 +33,12 @@ public class InvitationVendor {
     @Column(nullable = false)
     private String contactPersonName;
 
-    @Column(name = "type_of_services_provided", columnDefinition = "TEXT",nullable = false)
+    @ElementCollection
+    @CollectionTable(
+            name = "invitation_vendor_services",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "typeOfServicesProvided", nullable = false)
     private List<String> typeOfServicesProvided = new ArrayList<>();
 
     private String other;
@@ -72,10 +77,20 @@ public class InvitationVendor {
     private Integer yearsOfExperience;
 
     // Step 4
-    @Column(name = "invitation_types_offered", columnDefinition = "TEXT",nullable = false)
+    @ElementCollection
+    @CollectionTable(
+            name = "invitation_vendor_invitation_types_offered",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "invitationTypesOffered", nullable = false)
     private List<String> invitationTypesOffered = new ArrayList<>();
 
-    @Column(name = "printing_options", columnDefinition = "TEXT",nullable = false)
+    @ElementCollection
+    @CollectionTable(
+            name = "invitation_vendor_printing_options",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "printing_options", nullable = false)
     private List<String> printingOptions = new ArrayList<>();
 
     @Column(nullable = false)
@@ -85,7 +100,12 @@ public class InvitationVendor {
     private Boolean customizationAvailable;
 
     // Step 5
-    @Column(name = "types_of_gifts_offered", columnDefinition = "TEXT",nullable = false)
+    @ElementCollection
+    @CollectionTable(
+            name = "invitation_vendor_types_Of_Gifts_Offered",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "types_of_gifts_offered", nullable = false)
     private List<String> typesOfGiftsOffered = new ArrayList<>();
 
     @Column(nullable = false)
@@ -127,7 +147,12 @@ public class InvitationVendor {
     private Integer giftPreparation;
 
     // Step 8
-    @Column(name = "service_coverage_locations", columnDefinition = "TEXT",nullable = false)
+    @ElementCollection
+    @CollectionTable(
+            name = "invitation_vendor_service_coverage_locations",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "service_coverage_locations",nullable = false)
     private List<String> serviceCoverageLocations = new ArrayList<>();
 
     @Column(nullable = false)
@@ -136,10 +161,20 @@ public class InvitationVendor {
     @Column(columnDefinition = "TEXT")
     private String specialDescription;
 
-    @Column(name = "work_photos", columnDefinition = "TEXT")
+    @ElementCollection
+    @CollectionTable(
+            name = "invitation_vendor_work_photos",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "work_photos")
     private List<String> workPhotos = new ArrayList<>();
 
-    @Column(name = "portfolio", columnDefinition = "TEXT")
+    @ElementCollection
+    @CollectionTable(
+            name = "invitation_vendor_portfolio",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "portfolio")
     private List<String> portfolio = new ArrayList<>();
 
     // Step 9
