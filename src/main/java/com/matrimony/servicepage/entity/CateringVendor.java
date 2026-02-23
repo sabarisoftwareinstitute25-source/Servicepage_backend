@@ -79,7 +79,7 @@ public class CateringVendor {
     @Column(nullable = false)
     private String panNumber;
 
-    private String FSSAILicenseNumber;
+    private String fssaiLicenseNumber;
 
     @Column(nullable = false)
     private Integer yearOfExperience;
@@ -110,8 +110,13 @@ public class CateringVendor {
     @Column(nullable = false)
     private BigDecimal maxPlateCapacity;
 
-    @Column(nullable = false)
-    private String serviceType;
+    @ElementCollection
+    @CollectionTable(
+            name = "catering_vendor_special_service-type",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "service_type", nullable = false)
+    private List<String> serviceType = new ArrayList<>();
 
     @Column(nullable = false)
     private Boolean servingStaffProvided;
@@ -132,8 +137,8 @@ public class CateringVendor {
     private String balancePaymentTerms;
 
     // Step 7
-    @Column(nullable = false)
-    private Boolean FSSAICompliance;
+    @Column(name = "fssai_compliance", nullable = false)
+    private boolean fssaiCompliance;
 
     @Column(nullable = false)
     private String foodPreparationLocation;

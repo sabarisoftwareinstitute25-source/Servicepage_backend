@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -42,6 +43,12 @@ public class DecorationVendor {
     private List<String> typeOfDecorationServices = new ArrayList<>();
 
     private String other;
+
+    @Column(nullable = false)
+    private BigDecimal minBudgetRange;
+
+    @Column(nullable = false)
+    private BigDecimal maxBudgetRange;
 
     // Step 2
     @Column(nullable = false)
@@ -94,7 +101,12 @@ public class DecorationVendor {
     private List<String> materialsUsed = new ArrayList<>();
 
     // Step 5
-    @Column(name = "services_included", columnDefinition = "TEXT",nullable = false)
+    @ElementCollection
+    @CollectionTable(
+            name = "decoration_vendor_services_includes",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "services_included", nullable = false)
     private List<String> servicesIncluded = new ArrayList<>();
 
     private Integer setupTimeRequired;
@@ -111,7 +123,12 @@ public class DecorationVendor {
     private Boolean advancePaymentRequired;
 
     // Step 7
-    @Column(name = "preferred_locations", columnDefinition = "TEXT",nullable = false)
+    @ElementCollection
+    @CollectionTable(
+            name = "decoration_vendor_preferred_location",
+            joinColumns = @JoinColumn(name = "vendor_id")
+    )
+    @Column(name = "preferred_locations", nullable = false)
     private List<String> preferredLocations = new ArrayList<>();
 
     @Column(nullable = false)

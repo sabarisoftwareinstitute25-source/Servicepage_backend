@@ -29,7 +29,7 @@ public class CateringVendorFilterRequest {
     private Boolean wasteManagementArranged;
     private String businessType;
     private Integer yearOfExperience;
-    private Boolean advancePaymentRequired;
+    private Boolean advancePaymentRequired ;
     private List<String> documentsAvailable;
 
 }

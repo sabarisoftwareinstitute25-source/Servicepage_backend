@@ -1,8 +1,14 @@
 package com.matrimony.servicepage.service;
 
+import com.matrimony.servicepage.dto.CateringVendorFilterRequest;
+import com.matrimony.servicepage.dto.PhotographyVendorFilterRequest;
 import com.matrimony.servicepage.entity.CateringVendor;
+import com.matrimony.servicepage.entity.PhotographyVendor;
 import com.matrimony.servicepage.repository.CateringVendorRepository;
+import com.matrimony.servicepage.specification.CateringVendorSpecification;
+import com.matrimony.servicepage.specification.PhotographyVendorSpecification;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,5 +34,15 @@ public class CateringVendorService {
 
     public void delete(String id) {
         repository.deleteById(id);
+    }
+
+    // Filter
+
+    public List<CateringVendor> filterVendors(CateringVendorFilterRequest request) {
+
+        Specification<CateringVendor> spec =
+                CateringVendorSpecification.filter(request);
+
+        return repository.findAll(spec);
     }
 }

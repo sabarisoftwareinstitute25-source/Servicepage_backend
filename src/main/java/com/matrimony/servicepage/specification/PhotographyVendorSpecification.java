@@ -31,7 +31,7 @@ public class PhotographyVendorSpecification {
 
             } else if (request.getMinBudgetRange()!= null) {
 
-                BigDecimal budget = BigDecimal.valueOf(request.getMinBudgetRange());
+                BigDecimal budget = request.getMinBudgetRange();
 
                 predicates.add(
                         cb.and(

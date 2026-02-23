@@ -1,8 +1,14 @@
 package com.matrimony.servicepage.service;
 
+import com.matrimony.servicepage.dto.DecorationVendorFilterRequest;
+import com.matrimony.servicepage.dto.WeddingHallVendorFilterRequest;
 import com.matrimony.servicepage.entity.DecorationVendor;
+import com.matrimony.servicepage.entity.WeddingHallVendor;
 import com.matrimony.servicepage.repository.DecorationVendorRepository;
+import com.matrimony.servicepage.specification.DecorationVendorSpecification;
+import com.matrimony.servicepage.specification.WeddingHallVendorSpecification;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,5 +39,15 @@ public class DecorationVendorService {
 
     public void delete(String id) {
         repository.deleteById(id);
+    }
+
+    // Filter
+
+    public List<DecorationVendor> filterVendors(DecorationVendorFilterRequest request) {
+
+        Specification<DecorationVendor> spec =
+                DecorationVendorSpecification.filter(request);
+
+        return repository.findAll(spec);
     }
 }
