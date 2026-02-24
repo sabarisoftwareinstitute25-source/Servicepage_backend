@@ -1,8 +1,14 @@
 package com.matrimony.servicepage.service;
 
+import com.matrimony.servicepage.dto.PhotographyVendorFilterRequest;
+import com.matrimony.servicepage.dto.StylingVendorFilterRequest;
+import com.matrimony.servicepage.entity.PhotographyVendor;
 import com.matrimony.servicepage.entity.StylingVendor;
 import com.matrimony.servicepage.repository.StylingVendorRepository;
+import com.matrimony.servicepage.specification.PhotographyVendorSpecification;
+import com.matrimony.servicepage.specification.StylingVendorSpecification;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,5 +43,16 @@ public class StylingVendorService {
             throw new RuntimeException("Styling Vendor not found: " + id);
         }
         repository.deleteById(id);
+    }
+
+
+    // Filter
+
+    public List<StylingVendor> filterVendors(StylingVendorFilterRequest request) {
+
+        Specification<StylingVendor> spec =
+                StylingVendorSpecification.filter(request);
+
+        return repository.findAll(spec);
     }
 }
