@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -42,6 +43,12 @@ public class EntertainmentVendor {
     private List<String> typeOfEntertainmentServices = new ArrayList<>();
 
     private String other;
+
+    @Column(nullable = false)
+    private BigDecimal minBudgetRange;
+
+    @Column(nullable = false)
+    private BigDecimal maxBudgetRange;
 
     // Step 2
     @Column(nullable = false)
