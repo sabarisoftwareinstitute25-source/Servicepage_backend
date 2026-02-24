@@ -45,6 +45,8 @@ public class EntertainmentVendorController {
         return "Entertainment Vendor Deleted Successfully";
     }
 
+    // Filter
+
     @PostMapping("/filter")
     public List<EntertainmentVendor> filterVendors(
             @RequestBody EntertainmentVendorFilterRequest request) {

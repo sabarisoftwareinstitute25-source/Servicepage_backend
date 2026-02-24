@@ -1,5 +1,8 @@
 package com.matrimony.servicepage.controller;
 
+import com.matrimony.servicepage.dto.EntertainmentVendorFilterRequest;
+import com.matrimony.servicepage.dto.InvitationVendorFilterRequest;
+import com.matrimony.servicepage.entity.EntertainmentVendor;
 import com.matrimony.servicepage.entity.InvitationVendor;
 import com.matrimony.servicepage.service.InvitationVendorService;
 import lombok.RequiredArgsConstructor;
@@ -39,5 +42,14 @@ public class InvitationVendorController {
     public String delete(@PathVariable String id) {
         service.deleteVendor(id);
         return "Deleted Successfully";
+    }
+
+    // Filter
+
+    @PostMapping("/filter")
+    public List<InvitationVendor> filterVendors(
+            @RequestBody InvitationVendorFilterRequest request) {
+
+        return service.filterVendors(request);
     }
 }

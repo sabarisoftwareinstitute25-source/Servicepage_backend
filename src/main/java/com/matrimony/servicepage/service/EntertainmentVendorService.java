@@ -41,6 +41,8 @@ public class EntertainmentVendorService {
         repository.deleteById(id);
     }
 
+    // Filter
+
     public List<EntertainmentVendor> filterVendors(EntertainmentVendorFilterRequest request) {
 
         Specification<EntertainmentVendor> spec =

@@ -1,8 +1,14 @@
 package com.matrimony.servicepage.service;
 
+import com.matrimony.servicepage.dto.EntertainmentVendorFilterRequest;
+import com.matrimony.servicepage.dto.InvitationVendorFilterRequest;
+import com.matrimony.servicepage.entity.EntertainmentVendor;
 import com.matrimony.servicepage.entity.InvitationVendor;
 import com.matrimony.servicepage.repository.InvitationVendorRepository;
+import com.matrimony.servicepage.specification.EntertainmentVendorSpecification;
+import com.matrimony.servicepage.specification.InvitationVendorSpecification;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -43,5 +49,16 @@ public class InvitationVendorService {
             throw new RuntimeException("Invitation Vendor not found with ID: " + id);
         }
         repository.deleteById(id);
+    }
+
+
+    // Filter
+
+    public List<InvitationVendor> filterVendors(InvitationVendorFilterRequest request) {
+
+        Specification<InvitationVendor> spec =
+                InvitationVendorSpecification.filter(request);
+
+        return repository.findAll(spec);
     }
 }

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -42,6 +43,12 @@ public class InvitationVendor {
     private List<String> typeOfServicesProvided = new ArrayList<>();
 
     private String other;
+
+    @Column(nullable = false)
+    private BigDecimal minBudgetRange;
+
+    @Column(nullable = false)
+    private BigDecimal maxBudgetRange;
 
     // Step 2
     @Column(nullable = false)
@@ -119,16 +126,16 @@ public class InvitationVendor {
 
     // Step 6
     @Column(nullable = false)
-    private Integer invitationMinPrice;
+    private BigDecimal invitationMinPrice;
 
     @Column(nullable = false)
-    private Integer invitationMaxPrice;
+    private BigDecimal invitationMaxPrice;
 
     @Column(nullable = false)
-    private Integer giftMinPrice;
+    private BigDecimal giftMinPrice;
 
     @Column(nullable = false)
-    private Integer giftMaxPrice;
+    private BigDecimal giftMaxPrice;
 
     @Column(nullable = false)
     private Boolean advancePaymentRequired;
