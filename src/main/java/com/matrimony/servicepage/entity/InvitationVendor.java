@@ -1,6 +1,8 @@
 package com.matrimony.servicepage.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.matrimony.servicepage.util.BeanUtil;
+import com.matrimony.servicepage.util.IdGeneratorService;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,6 +24,23 @@ public class InvitationVendor {
     @Id
     @Column(name = "invitation_vendor_id", nullable = false, length = 30)
     private String invitationVendorId;
+
+    @PrePersist
+    protected void generateId() {
+        if (this.invitationVendorId == null || this.invitationVendorId.isBlank()) {
+            this.invitationVendorId = BeanUtil.getBean(IdGeneratorService.class)
+                    .generateMonthlyId("InvitationVendor",
+                            "invitationVendorId",
+                            "IVF",
+                            null,
+                            4);
+        }
+
+        // 2️⃣ Set Created Time
+        if (this.createdAt == null) {
+            this.createdAt = LocalDateTime.now();
+        }
+    }
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "vendor_id", nullable = false, unique = true)
@@ -218,10 +237,6 @@ public class InvitationVendor {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @PrePersist
-    protected void onCreate() {
-        createdAt = LocalDateTime.now();
-    }
 
     @PreUpdate
     protected void onUpdate() {

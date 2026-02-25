@@ -1,5 +1,7 @@
 package com.matrimony.servicepage.entity;
 
+import com.matrimony.servicepage.util.BeanUtil;
+import com.matrimony.servicepage.util.IdGeneratorService;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,6 +22,23 @@ public class CustomerRegistration {
     @Id
     @Column(name = "customer_registration_id", length = 25)
     private String customerRegistrationId;
+
+    @PrePersist
+    protected void generateId() {
+        if (this.customerRegistrationId == null || this.customerRegistrationId.isBlank()) {
+            this.customerRegistrationId = BeanUtil.getBean(IdGeneratorService.class)
+                    .generateMonthlyId("CustomerRegistration",
+                            "customerRegistrationId",
+                            "CR",
+                            null,
+                            6);
+        }
+
+        // 2️⃣ Set Created Time
+        if (this.createdAt == null) {
+            this.createdAt = LocalDateTime.now();
+        }
+    }
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "customer_id", unique = true)
@@ -161,10 +180,6 @@ public class CustomerRegistration {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @PrePersist
-    protected void onCreate() {
-        createdAt = LocalDateTime.now();
-    }
 
     @PreUpdate
     protected void onUpdate() {

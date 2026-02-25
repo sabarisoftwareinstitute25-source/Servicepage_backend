@@ -1,9 +1,12 @@
 package com.matrimony.servicepage.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.matrimony.servicepage.util.BeanUtil;
+import com.matrimony.servicepage.util.IdGeneratorService;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -19,8 +22,31 @@ import java.util.*;
 public class BackgroundInvestigationVendor {
 
     @Id
-    @Column(name = "background_investigation_vendor_id", nullable = false, length = 30)
+    @Column(name = "background_investigation_id", length = 25)
     private String backgroundInvestigationVendorId;
+
+    @PrePersist
+    protected void prePersist() {
+
+        // 1️⃣ Generate ID
+        if (this.backgroundInvestigationVendorId == null
+                || this.backgroundInvestigationVendorId.isBlank()) {
+
+            this.backgroundInvestigationVendorId =
+                    BeanUtil.getBean(IdGeneratorService.class)
+                            .generateMonthlyId(
+                                    "BackgroundInvestigationVendor",
+                                    "backgroundInvestigationVendorId",
+                                    "BVF",
+                                    null,
+                                    4);
+        }
+
+        // 2️⃣ Set Created Time
+        if (this.createdAt == null) {
+            this.createdAt = LocalDateTime.now();
+        }
+    }
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "vendor_id", nullable = false, unique = true)
@@ -47,6 +73,12 @@ public class BackgroundInvestigationVendor {
     @Column(nullable = false)
     private String panNumber;
 
+    @Column(nullable = false)
+    private BigDecimal minBudgetRange;
+
+    @Column(nullable = false)
+    private BigDecimal maxBudgetRange;
+
     // Step 2
     @Column(nullable = false)
     private String privateDetectiveLicenseNumber;
@@ -70,7 +102,7 @@ public class BackgroundInvestigationVendor {
     private String branchOfficeAddress;
 
     @Column(nullable = false)
-    private String city;
+    private String district;
 
     @Column(nullable = false)
     private String state;
@@ -166,10 +198,6 @@ public class BackgroundInvestigationVendor {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @PrePersist
-    protected void onCreate() {
-        this.createdAt = LocalDateTime.now();
-    }
 
     @PreUpdate
     protected void onUpdate() {

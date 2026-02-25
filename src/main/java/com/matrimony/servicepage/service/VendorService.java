@@ -2,14 +2,12 @@ package com.matrimony.servicepage.service;
 
 import com.matrimony.servicepage.entity.Vendor;
 import com.matrimony.servicepage.repository.VendorRepository;
-import com.matrimony.servicepage.util.IdGenerator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.time.Year;
+import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -17,8 +15,6 @@ public class VendorService {
 
     private final VendorRepository vendorRepository;
     private final PasswordEncoder passwordEncoder;
-    private final IdGenerator idGenerator;
-
 
     // 🔹 Create Vendor
     public Vendor createVendor(Vendor vendor) {
@@ -31,10 +27,10 @@ public class VendorService {
             throw new RuntimeException("Mobile number already exists");
         }
 
-        String vendorId = idGenerator.generateId("V", 4);
-        vendor.setVendorId(vendorId);
-
+        // Encode password
         vendor.setPassword(passwordEncoder.encode(vendor.getPassword()));
+
+        // Default Status
         vendor.setStatus(Vendor.VendorStatus.PENDING);
 
         return vendorRepository.save(vendor);

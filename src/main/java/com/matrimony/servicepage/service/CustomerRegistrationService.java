@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -14,43 +13,43 @@ public class CustomerRegistrationService {
 
     private final CustomerRegistrationRepository repository;
 
-    // CREATE
+    // 🔹 CREATE
     public CustomerRegistration createRegistration(CustomerRegistration registration) {
-
-        if (registration.getCustomerRegistrationId() == null) {
-            registration.setCustomerRegistrationId(
-                    "CR-" + UUID.randomUUID().toString().substring(0,8).toUpperCase()
-            );
-        }
-
+        // ID will be auto-generated in Entity using @PrePersist
         return repository.save(registration);
     }
 
-    // GET ALL
+    // 🔹 GET ALL
     public List<CustomerRegistration> getAll() {
         return repository.findAll();
     }
 
-    // GET BY ID
+    // 🔹 GET BY ID
     public CustomerRegistration getById(String id) {
         return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Registration not found"));
+                .orElseThrow(() ->
+                        new RuntimeException("Customer Registration not found with ID: " + id));
     }
 
-    // UPDATE
+    // 🔹 UPDATE
     public CustomerRegistration update(String id, CustomerRegistration updated) {
 
         CustomerRegistration existing = getById(id);
 
+        // Preserve ID
         updated.setCustomerRegistrationId(existing.getCustomerRegistrationId());
-        updated.setCustomer(existing.getCustomer());
+
+        // Preserve Customer relationship if not sent
+        if (updated.getCustomer() == null) {
+            updated.setCustomer(existing.getCustomer());
+        }
 
         return repository.save(updated);
     }
 
-    // DELETE
+    // 🔹 DELETE
     public void delete(String id) {
-        repository.deleteById(id);
+        CustomerRegistration existing = getById(id);
+        repository.delete(existing);
     }
-
 }

@@ -1,5 +1,7 @@
 package com.matrimony.servicepage.entity;
 
+import com.matrimony.servicepage.util.BeanUtil;
+import com.matrimony.servicepage.util.IdGeneratorService;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -15,6 +17,20 @@ public class Customer {
     @Id
     @Column(name = "customer_id", length = 25)
     private String customerId;  // EIS+yyyy+C+mm+000001
+
+    @PrePersist
+    public void generateId() {
+        if (this.customerId == null || this.customerId.isBlank()) {
+            this.customerId = BeanUtil.getBean(IdGeneratorService.class)
+                    .generateMonthlyId(
+                            "Customer",
+                            "customerId",
+                            "EIS",
+                            "C",
+                            6
+                    );
+        }
+    }
 
     @Column(nullable = false)
     private String fullName;

@@ -2,11 +2,11 @@ package com.matrimony.servicepage.service;
 
 import com.matrimony.servicepage.entity.Customer;
 import com.matrimony.servicepage.repository.CustomerRepository;
-import com.matrimony.servicepage.util.IdGenerator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -14,19 +14,20 @@ import java.util.List;
 public class CustomerService {
 
     private final CustomerRepository repository;
-    private final IdGenerator idGenerator;
     private final PasswordEncoder passwordEncoder;
 
     // 🔹 Create Customer
     public Customer createCustomer(Customer customer) {
 
+        if (customer.getMobileNumber() == null || customer.getMobileNumber().isBlank()) {
+            throw new RuntimeException("Mobile number is required");
+        }
         if (repository.existsByMobileNumber(customer.getMobileNumber())) {
             throw new RuntimeException("Mobile number already exists");
         }
-
-        // Generate ID
-        String customerId = idGenerator.generateId("C", 6);
-        customer.setCustomerId(customerId);
+        if (customer.getPassword() == null || customer.getPassword().isBlank()) {
+            throw new RuntimeException("Password is required");
+        }
 
         // Encode password
         customer.setPassword(passwordEncoder.encode(customer.getPassword()));
