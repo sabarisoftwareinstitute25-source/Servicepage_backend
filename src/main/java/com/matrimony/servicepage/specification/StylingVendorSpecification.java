@@ -1,9 +1,7 @@
 package com.matrimony.servicepage.specification;
 
 
-import com.matrimony.servicepage.dto.PhotographyVendorFilterRequest;
 import com.matrimony.servicepage.dto.StylingVendorFilterRequest;
-import com.matrimony.servicepage.entity.PhotographyVendor;
 import com.matrimony.servicepage.entity.StylingVendor;
 import jakarta.persistence.criteria.Join;
 import org.springframework.data.jpa.domain.Specification;

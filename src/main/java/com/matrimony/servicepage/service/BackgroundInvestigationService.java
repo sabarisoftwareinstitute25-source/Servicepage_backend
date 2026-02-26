@@ -1,8 +1,14 @@
 package com.matrimony.servicepage.service;
 
+import com.matrimony.servicepage.dto.BackgroundInvestigationVendorFilterRequest;
+import com.matrimony.servicepage.dto.CateringVendorFilterRequest;
 import com.matrimony.servicepage.entity.BackgroundInvestigationVendor;
+import com.matrimony.servicepage.entity.CateringVendor;
 import com.matrimony.servicepage.repository.BackgroundInvestigationRepository;
+import com.matrimony.servicepage.specification.BackgroundInvestigationVendorSpecification;
+import com.matrimony.servicepage.specification.CateringVendorSpecification;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -42,5 +48,15 @@ public class BackgroundInvestigationService {
             throw new RuntimeException("Background Investigation Vendor not found: " + id);
         }
         repository.deleteById(id);
+    }
+
+    // Filter
+
+    public List<BackgroundInvestigationVendor> filterVendors(BackgroundInvestigationVendorFilterRequest request) {
+
+        Specification<BackgroundInvestigationVendor> spec =
+                BackgroundInvestigationVendorSpecification.filter(request);
+
+        return repository.findAll(spec);
     }
 }

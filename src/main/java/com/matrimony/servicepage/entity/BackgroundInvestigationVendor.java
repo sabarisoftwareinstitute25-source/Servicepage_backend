@@ -56,13 +56,9 @@ public class BackgroundInvestigationVendor {
     @Column(nullable = false)
     private String registeredAgencyName;
 
-    @ElementCollection
-    @CollectionTable(
-            name = "background_investigation_type_of_entity",
-            joinColumns = @JoinColumn(name = "vendor_id")
-    )
+
     @Column(name = "type_of_entity", nullable = false)
-    private List<String> typeOfEntity = new ArrayList<>();
+    private String typeOfEntity;
 
     @Column(nullable = false)
     private Integer yearOfEstablishment;

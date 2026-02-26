@@ -1,6 +1,9 @@
 package com.matrimony.servicepage.controller;
 
+import com.matrimony.servicepage.dto.BackgroundInvestigationVendorFilterRequest;
+import com.matrimony.servicepage.dto.DecorationVendorFilterRequest;
 import com.matrimony.servicepage.entity.BackgroundInvestigationVendor;
+import com.matrimony.servicepage.entity.DecorationVendor;
 import com.matrimony.servicepage.service.BackgroundInvestigationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -40,5 +43,12 @@ public class BackgroundInvestigationController {
     public String delete(@PathVariable String id) {
         service.delete(id);
         return "Background Investigation Vendor Deleted Successfully";
+    }
+
+    @PostMapping("/filter")
+    public List<BackgroundInvestigationVendor> filterVendors(
+            @RequestBody BackgroundInvestigationVendorFilterRequest request) {
+
+        return service.filterVendors(request);
     }
 }
