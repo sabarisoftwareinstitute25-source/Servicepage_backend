@@ -22,13 +22,13 @@ public class CustomerProfileResponse {
     private String complexion;
 
     // contact information
-    private Long mobileNumber;
-    private Long alternateMobileNumber;
+    private String mobileNumber;
+    private String alternateMobileNumber;
     private String emailId;
     private String address;
     private String district;
     private String state;
-    private Integer pinCode;
+    private String pinCode;
 
     // family details
     private String fatherName;

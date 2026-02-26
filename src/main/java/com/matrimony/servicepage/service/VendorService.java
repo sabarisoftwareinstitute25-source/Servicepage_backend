@@ -16,7 +16,7 @@ public class VendorService {
     private final VendorRepository vendorRepository;
     private final PasswordEncoder passwordEncoder;
 
-    // 🔹 Create Vendor
+    //  Create Vendor
     public Vendor createVendor(Vendor vendor) {
 
         if (vendorRepository.existsByEmailId(vendor.getEmailId())) {
@@ -36,25 +36,25 @@ public class VendorService {
         return vendorRepository.save(vendor);
     }
 
-    // 🔹 Get All Vendors
+    // Get All Vendors
     public List<Vendor> getAllVendors() {
         return vendorRepository.findAll();
     }
 
-    // 🔹 Get Vendor By ID
+    //  Get Vendor By ID
     public Vendor getVendorById(String id) {
         return vendorRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Vendor not found"));
     }
 
-    // 🔹 Update Vendor Status
+    // Update Vendor Status
     public Vendor updateStatus(String id, Vendor.VendorStatus status) {
         Vendor vendor = getVendorById(id);
         vendor.setStatus(status);
         return vendorRepository.save(vendor);
     }
 
-    // 🔹 Delete Vendor
+    // Delete Vendor
     public void deleteVendor(String id) {
         Vendor vendor = getVendorById(id);
         vendorRepository.delete(vendor);

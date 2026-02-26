@@ -70,15 +70,15 @@ public class CateringVendor {
 
     // Step 2
     @Column(nullable = false)
-    private Long mobileNumber;
+    private String mobileNumber;
 
-    private Long alternateMobileNumber;
+    private String alternateMobileNumber;
 
     @Column(nullable = false)
     private String emailId;
 
     @Column(nullable = false, length = 500)
-    private String address;
+    private String officeAddress;
 
     @Column(nullable = false)
     private String district;
@@ -87,10 +87,10 @@ public class CateringVendor {
     private String state;
 
     @Column(nullable = false)
-    private Integer pinCode;
+    private String pinCode;
 
     // Step 3
-    @Column(nullable = false)
+    @Column(name = "business_type", columnDefinition = "TEXT",nullable = false)
     private String businessType;
 
     private String gstNumber;
@@ -98,10 +98,10 @@ public class CateringVendor {
     @Column(nullable = false)
     private String panNumber;
 
-    private String fssaiLicenseNumber;
+    private String FSSAILicenseNumber;
 
     @Column(nullable = false)
-    private Integer yearOfExperience;
+    private Integer yearsOfExperience;
 
     // Step 4
     @ElementCollection
@@ -145,10 +145,10 @@ public class CateringVendor {
 
     // Step 6
     @Column(nullable = false)
-    private Integer pricePerPlateFrom;
+    private BigDecimal pricePerPlateFrom;
 
     @Column(nullable = false)
-    private Integer pricePerPlateTo;
+    private BigDecimal pricePerPlateTo;
 
     @Column(nullable = false)
     private Boolean advancePaymentRequired;
@@ -157,7 +157,7 @@ public class CateringVendor {
 
     // Step 7
     @Column(name = "fssai_compliance", nullable = false)
-    private boolean fssaiCompliance;
+    private boolean FSSAICompliance;
 
     @Column(nullable = false)
     private String foodPreparationLocation;
@@ -202,7 +202,7 @@ public class CateringVendor {
 
     // Step 9
     @Column(nullable = false)
-    private Long numberOfWeddingsCatered;
+    private Integer numberOfWeddingsCatered;
 
     private String majorClients;
 

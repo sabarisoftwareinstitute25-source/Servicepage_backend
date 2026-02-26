@@ -48,7 +48,7 @@ public class EntertainmentVendor {
 
     // Step 1
     @Column(nullable = false)
-    private String vendorName;
+    private String companyName;
 
     @Column(nullable = false)
     private String contactPersonName;
@@ -88,7 +88,7 @@ public class EntertainmentVendor {
     private String state;
 
     @Column(nullable = false)
-    private Integer pinCode;
+    private String pinCode;
 
     // Step 3
     @Column(name = "business_type", columnDefinition = "TEXT",nullable = false)
@@ -158,7 +158,7 @@ public class EntertainmentVendor {
     private Boolean timeRestrictionsAware;
 
     @Column(columnDefinition = "TEXT")
-    private String specialDescription;
+    private String description;
 
     @ElementCollection
     @CollectionTable(
@@ -193,7 +193,7 @@ public class EntertainmentVendor {
 
     // Step 9
     @Column(name = "website_url", length = 500)
-    private String websiteUrl;
+    private String websiteLink;
 
     @Column(name = "instagram_link", length = 500)
     private String instagramLink;

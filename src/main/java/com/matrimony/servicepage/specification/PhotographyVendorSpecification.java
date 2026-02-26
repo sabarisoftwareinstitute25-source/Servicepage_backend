@@ -64,13 +64,13 @@ public class PhotographyVendorSpecification {
             }
 
             // Preferred Locations (LIKE search)
-            if (request.getPreferredLocations() != null &&
-                    !request.getPreferredLocations().isEmpty()) {
+            if (request.getPreferredWeddingLocations() != null &&
+                    !request.getPreferredWeddingLocations().isEmpty()) {
 
-                Join<Object, Object> join = root.join("preferredLocations");
+                Join<Object, Object> join = root.join("preferredWeddingLocations");
 
                 predicates.add(
-                        join.in(request.getPreferredLocations())
+                        join.in(request.getPreferredWeddingLocations())
                 );
 
                 query.distinct(true); // important to avoid duplicate results
@@ -103,31 +103,31 @@ public class PhotographyVendorSpecification {
             }
 
             // Photo Delivery Days (max allowed days)
-            if (request.getPhotoDeliveryDays() != null) {
+            if (request.getPhotoDelivery() != null) {
                 predicates.add(
                         cb.lessThanOrEqualTo(
-                                root.get("photoDeliveryDays"),
-                                request.getPhotoDeliveryDays()
+                                root.get("photoDelivery"),
+                                request.getPhotoDelivery()
                         )
                 );
             }
 
             // Video Delivery Days
-            if (request.getVideoDeliveryDays() != null) {
+            if (request.getVideoDelivery() != null) {
                 predicates.add(
                         cb.lessThanOrEqualTo(
-                                root.get("videoDeliveryDays"),
-                                request.getVideoDeliveryDays()
+                                root.get("videoDelivery"),
+                                request.getVideoDelivery()
                         )
                 );
             }
 
             // Album Delivery Days
-            if (request.getAlbumDeliveryDays() != null) {
+            if (request.getAlbumDelivery() != null) {
                 predicates.add(
                         cb.lessThanOrEqualTo(
-                                root.get("albumDeliveryDays"),
-                                request.getAlbumDeliveryDays()
+                                root.get("albumDelivery"),
+                                request.getAlbumDelivery()
                         )
                 );
             }

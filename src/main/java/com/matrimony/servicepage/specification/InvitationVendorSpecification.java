@@ -199,10 +199,10 @@ public class InvitationVendorSpecification {
             }
 
             // Printing Delivery
-            if (request.getPrintingDelivery() != null) {
+            if (request.getPrinting() != null) {
                 predicates.add(cb.lessThanOrEqualTo(
-                        root.get("printingDelivery"),
-                        request.getPrintingDelivery()));
+                        root.get("printing"),
+                        request.getPrinting()));
             }
 
             // Gift Preparation

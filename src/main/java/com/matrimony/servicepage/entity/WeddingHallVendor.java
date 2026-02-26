@@ -71,9 +71,9 @@ public class WeddingHallVendor {
 
     // Step 2
     @Column(nullable = false)
-    private Long mobileNumber;
+    private String mobileNumber;
 
-    private Long alternateMobileNumber;
+    private String alternateMobileNumber;
 
     @Column(nullable = false)
     private String emailId;
@@ -88,7 +88,7 @@ public class WeddingHallVendor {
     private String state;
 
     @Column(nullable = false)
-    private Integer pinCode;
+    private String pinCode;
 
     // Step 3
     @Column(name = "business_type", columnDefinition = "TEXT",nullable = false)
@@ -149,7 +149,7 @@ public class WeddingHallVendor {
     private List<String> timeSlotsAvailable = new ArrayList<>();
 
     @Column(length = 2000)
-    private String specialDescription;
+    private String Description;
 
     @ElementCollection
     @CollectionTable(
@@ -190,7 +190,7 @@ public class WeddingHallVendor {
     private Boolean outsideCateringAllowed;
 
     @Column(nullable = false)
-    private boolean decorationAllowed;
+    private Boolean decorationAllowed;
 
     @Column(nullable = false)
     private Boolean djAllowed;
@@ -202,13 +202,13 @@ public class WeddingHallVendor {
 
     // Step 9
     @Column(name = "website_url", length = 500)
-    private String websiteUrl;
+    private String websiteLink;
 
     @Column(name = "google_maps_link", length = 500)
     private String googleMapsLink;
 
     @Column(name = "social_media_links", length = 500)
-    private String socialMediaLinks;
+    private String socialMediaPages;
 
     // Step 10
     @Column(nullable = false)

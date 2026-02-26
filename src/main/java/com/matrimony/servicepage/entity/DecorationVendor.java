@@ -48,7 +48,7 @@ public class DecorationVendor {
 
     // Step 1
     @Column(nullable = false)
-    private String vendorName;
+    private String companyName;
 
     @Column(nullable = false)
     private String contactPersonName;
@@ -88,7 +88,7 @@ public class DecorationVendor {
     private String state;
 
     @Column(nullable = false)
-    private Integer pinCode;
+    private String   pinCode;
 
     // Step 3
     @Column(name = "business_type", columnDefinition = "TEXT",nullable = false)
@@ -154,7 +154,7 @@ public class DecorationVendor {
     private Boolean transportationChargesApplicable;
 
     @Column(columnDefinition = "TEXT")
-    private String specialDescription;
+    private String description;
 
     @ElementCollection
     @CollectionTable(
@@ -179,17 +179,17 @@ public class DecorationVendor {
     private Boolean uniformedStaff;
 
     @Column(nullable = false)
-    private Boolean ownToolsEquipment;
+    private Boolean ownTools;
 
     // Step 9
     @Column(name = "website_url", length = 500)
-    private String websiteUrl;
+    private String websiteLink;
 
-    @Column(name = "google_maps_link", length = 500)
-    private String googleMapsLink;
+    @Column(name = "instagram_page", length = 500)
+    private String instagramPage;
 
-    @Column(name = "sample_work_link", length = 500)
-    private String sampleWorkLink;
+    @Column(name = "google_drive_link", length = 500)
+    private String googleDriveLink;
 
     // Step 10
     @Column(nullable = false)

@@ -177,11 +177,11 @@ public class CateringVendorSpecification {
             }
 
             // Minimum Years of Experience
-            if (request.getYearOfExperience() != null) {
+            if (request.getYearsOfExperience() != null) {
                 predicates.add(
                         cb.greaterThanOrEqualTo(
-                                root.get("yearOfExperience"),
-                                request.getYearOfExperience()
+                                root.get("yearsOfExperience"),
+                                request.getYearsOfExperience()
                         )
                 );
             }

@@ -27,7 +27,7 @@ public class InvitationVendorFilterRequest {
     private BigDecimal giftMaxPrice;
     private Boolean advancePaymentRequired;
     private Integer designApproval;
-    private Integer printingDelivery;
+    private Integer printing;
     private Integer giftPreparation;
     private String state;
     private String district;

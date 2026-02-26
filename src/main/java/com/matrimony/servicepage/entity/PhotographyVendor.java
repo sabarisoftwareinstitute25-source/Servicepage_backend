@@ -80,7 +80,7 @@ public class PhotographyVendor {
     private String emailId;
 
     @Column(nullable = false, length = 500)
-    private String address;
+    private String officeAddress;
 
     @Column(nullable = false)
     private String district;
@@ -89,7 +89,7 @@ public class PhotographyVendor {
     private String state;
 
     @Column(nullable = false)
-    private Integer pinCode;
+    private String pinCode;
 
     // Step 3
     @Column(name = "business_type", columnDefinition = "TEXT",nullable = false)
@@ -107,7 +107,7 @@ public class PhotographyVendor {
 
     // Step 4
     @Column(nullable = false)
-    private String cameraModels;
+    private String cameraModelsUsed;
 
     private String videoEquipment;
 
@@ -119,16 +119,16 @@ public class PhotographyVendor {
     // Step 5
     @ElementCollection
     @CollectionTable(
-            name = "photography_vendor_preferred_locations",
+            name = "photography_vendor_preferred_wedding_locations",
             joinColumns = @JoinColumn(name = "vendor_id")
     )
-    @Column(name = "preferred_locations", nullable = false)
-    private List<String> preferredLocations = new ArrayList<>();
+    @Column(name = "preferred_wedding_locations", nullable = false)
+    private List<String> preferredWeddingLocations = new ArrayList<>();
 
     private Boolean travelChargesApplicable;
 
     @Column(length = 2000)
-    private String specialDescription;
+    private String Description;
 
     @ElementCollection
     @CollectionTable(
@@ -154,19 +154,18 @@ public class PhotographyVendor {
     private BigDecimal fullWeddingPackage;
 
     private BigDecimal candidPhotography;
-    private BigDecimal videographyCinematic;
+    private BigDecimal videography;
     private BigDecimal albumCharges;
 
     // Step 7
     @Column(nullable = false)
-    private Integer photoDeliveryDays;
-
-    private Integer videoDeliveryDays;
-    private Integer albumDeliveryDays;
+    private Integer photoDelivery;
+    private Integer videoDelivery;
+    private Integer albumDelivery;
 
     // Step 8
     private String websiteUrl;
-    private String socialMediaHandle;
+    private String instagramPageUrl;
     private String sampleWorkLink;
 
     // Step 9

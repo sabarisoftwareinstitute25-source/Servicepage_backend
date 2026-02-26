@@ -14,12 +14,12 @@ public class PhotographyVendorFilterRequest {
     private BigDecimal maxBudgetRange;
     private String state;
     private String district;
-    private List<String> preferredLocations;
+    private List<String> preferredWeddingLocations;
     private Boolean travelChargesApplicable;
     private Integer yearsOfExperience;  //min year
     private String businessType;
-    private Integer photoDeliveryDays;
-    private Integer videoDeliveryDays;
-    private Integer albumDeliveryDays;
+    private Integer photoDelivery;
+    private Integer videoDelivery;
+    private Integer albumDelivery;
 
 }

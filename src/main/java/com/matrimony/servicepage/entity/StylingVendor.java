@@ -88,7 +88,7 @@ public class StylingVendor {
     private String state;
 
     @Column(nullable = false)
-    private Integer pinCode;
+    private String pinCode;
 
     // Step 3
     @Column(name = "business_type", columnDefinition = "TEXT",nullable = false)
@@ -151,17 +151,17 @@ public class StylingVendor {
     // Step 7
     @ElementCollection
     @CollectionTable(
-            name = "styling_vendor_preferred_locations",
+            name = "styling_vendor_preferred_service_locations",
             joinColumns = @JoinColumn(name = "vendor_id")
     )
-    @Column(name = "preferred_locations", nullable = false)
-    private List<String> preferredLocations = new ArrayList<>();
+    @Column(name = "preferred_service_locations", nullable = false)
+    private List<String> preferredServiceLocations = new ArrayList<>();
 
     @Column(nullable = false)
     private Boolean travelChargesApplicable;
 
     @Column(columnDefinition = "TEXT")
-    private String specialDescription;
+    private String description;
 
     @ElementCollection
     @CollectionTable(

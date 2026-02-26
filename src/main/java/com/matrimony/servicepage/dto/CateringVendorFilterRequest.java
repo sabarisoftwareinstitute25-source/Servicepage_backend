@@ -28,7 +28,7 @@ public class CateringVendorFilterRequest {
     private Boolean waterSource;
     private Boolean wasteManagementArranged;
     private String businessType;
-    private Integer yearOfExperience;
+    private Integer yearsOfExperience;
     private Boolean advancePaymentRequired ;
     private List<String> documentsAvailable;
 

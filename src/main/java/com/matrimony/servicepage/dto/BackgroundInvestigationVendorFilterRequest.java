@@ -13,7 +13,7 @@
     public class BackgroundInvestigationVendorFilterRequest {
 
         private String typeOfEntity;
-        private Integer yearOfEstablishment;
+        private Integer yearsOfEstablishment;
         private BigDecimal minBudgetRange;
         private BigDecimal maxBudgetRange;
         private Boolean licenseVerified;

@@ -69,9 +69,9 @@ public class CustomerRegistration {
 
     // Step 2
     @Column(nullable = false)
-    private Long mobileNumber;
+    private String mobileNumber;
 
-    private Long alternateMobileNumber;
+    private String alternateMobileNumber;
 
     @Column(nullable = false)
     private String emailId;
@@ -86,7 +86,7 @@ public class CustomerRegistration {
     private String state;
 
     @Column(nullable = false)
-    private Integer pinCode;
+    private String pinCode;
 
     // Step 3
     private String fatherName;

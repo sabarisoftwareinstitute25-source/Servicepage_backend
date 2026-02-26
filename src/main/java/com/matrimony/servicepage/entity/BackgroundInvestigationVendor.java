@@ -61,7 +61,7 @@ public class BackgroundInvestigationVendor {
     private String typeOfEntity;
 
     @Column(nullable = false)
-    private Integer yearOfEstablishment;
+    private Integer yearsOfEstablishment;
 
     private String registrationNumber;
     private String gstNumber;
@@ -104,7 +104,7 @@ public class BackgroundInvestigationVendor {
     private String state;
 
     @Column(nullable = false)
-    private Integer pinCode;
+    private String pinCode;
 
     // Step 4
     @Column(nullable = false)
@@ -114,9 +114,9 @@ public class BackgroundInvestigationVendor {
     private String designation;
 
     @Column(nullable = false)
-    private Long mobileNumber;
+    private String mobileNumber;
 
-    private Long alternateContactNumber;
+    private String alternateContactNumber;
 
     @Column(nullable = false)
     private String emailId;

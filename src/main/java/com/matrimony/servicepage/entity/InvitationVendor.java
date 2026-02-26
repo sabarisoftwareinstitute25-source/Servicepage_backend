@@ -48,7 +48,7 @@ public class InvitationVendor {
 
     // Step 1
     @Column(nullable = false)
-    private String vendorName;
+    private String companyName;
 
     @Column(nullable = false)
     private String contactPersonName;
@@ -88,7 +88,7 @@ public class InvitationVendor {
     private String state;
 
     @Column(nullable = false)
-    private Integer pinCode;
+    private String pinCode;
 
     // Step 3
     @Column(name = "business_type", columnDefinition = "TEXT",nullable = false)
@@ -167,7 +167,7 @@ public class InvitationVendor {
     private Integer designApproval;
 
     @Column(nullable = false)
-    private Integer printingDelivery;
+    private Integer printing;
 
     @Column(nullable = false)
     private Integer giftPreparation;
@@ -185,7 +185,7 @@ public class InvitationVendor {
     private Boolean travelChargesApplicable;
 
     @Column(columnDefinition = "TEXT")
-    private String specialDescription;
+    private String description;
 
     @ElementCollection
     @CollectionTable(

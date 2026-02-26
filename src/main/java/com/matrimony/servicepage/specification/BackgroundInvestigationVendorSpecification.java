@@ -31,10 +31,10 @@ public class BackgroundInvestigationVendorSpecification {
             }
 
             // Year Of Establishment
-            if (request.getYearOfEstablishment() != null) {
+            if (request.getYearsOfEstablishment() != null) {
                 predicates.add(cb.greaterThanOrEqualTo(
-                        root.get("yearOfEstablishment"),
-                        request.getYearOfEstablishment()));
+                        root.get("yearsOfEstablishment"),
+                        request.getYearsOfEstablishment()));
             }
 
             if (request.getMinBudgetRange() != null && request.getMaxBudgetRange() != null) {

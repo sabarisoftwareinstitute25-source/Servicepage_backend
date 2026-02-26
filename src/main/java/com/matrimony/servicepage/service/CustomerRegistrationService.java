@@ -1,6 +1,8 @@
 package com.matrimony.servicepage.service;
 
+import com.matrimony.servicepage.dto.CustomerProfileResponse;
 import com.matrimony.servicepage.entity.CustomerRegistration;
+import com.matrimony.servicepage.mapper.CustomerProfileMapper;
 import com.matrimony.servicepage.repository.CustomerRegistrationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -52,4 +54,14 @@ public class CustomerRegistrationService {
         CustomerRegistration existing = getById(id);
         repository.delete(existing);
     }
+
+
+    // PROFILE (Return DTO)
+    public CustomerProfileResponse getProfile(String id) {
+
+        CustomerRegistration customer = getById(id);
+        return CustomerProfileMapper.toDto(customer);
+    }
+
+
 }

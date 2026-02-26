@@ -1,6 +1,7 @@
 package com.matrimony.servicepage.controller;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.matrimony.servicepage.dto.CustomerProfileResponse;
 import com.matrimony.servicepage.entity.CustomerRegistration;
 import com.matrimony.servicepage.service.CustomerRegistrationService;
 import lombok.RequiredArgsConstructor;
@@ -52,6 +53,13 @@ public class CustomerRegistrationController {
     public ResponseEntity<String> delete(@PathVariable String id) {
         service.delete(id);
         return ResponseEntity.ok("Deleted Successfully");
+    }
+
+
+    // PROFILE API
+    @GetMapping("/profile/{id}")
+    public ResponseEntity<  CustomerProfileResponse> getProfile(@PathVariable String id) {
+        return ResponseEntity.ok(service.getProfile(id));
     }
 
 }
