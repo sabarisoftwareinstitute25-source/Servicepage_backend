@@ -9,6 +9,4 @@ public class ServicepageApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ServicepageApplication.class, args);
 	}
-
 }
-
